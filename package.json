@@ -11,7 +11,7 @@
     "bankai": "^8.1.0"
   },
   "scripts": {
-    "start": "bankai start"
+    "start": "bankai start -p 3000"
   },
   "repository": {
     "type": "git",
