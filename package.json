@@ -8,7 +8,7 @@
     "simple-get": "^2.7.0"
   },
   "devDependencies": {
-    "bankai": "^9.10.4"
+    "bankai": "^8.1.0"
   },
   "scripts": {
     "start": "bankai start"
