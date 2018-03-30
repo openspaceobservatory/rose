@@ -15,9 +15,7 @@ $ npm install
 $ npm start
 ```
 
-`bankai` will spin up a local development server at `https://localhost:8080` (note: `https` instead of `http`).
-
-When visiting the URL, if you are shown a warning, follow your browser's instructions to add a certificate exception in order to proceed.
+`bankai` will spin up a local development server at `http://localhost:8080`.
 
 ## Notes
 
