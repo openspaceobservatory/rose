@@ -5,7 +5,7 @@ module.exports = example
 function example (state, emit) {
   return html`
     <body>
-      <div>Let's go space!</div>
+      <div>Let's go to space!</div>
     </body>
   `
 }

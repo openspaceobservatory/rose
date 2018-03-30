@@ -2,16 +2,15 @@
   "name": "rose",
   "version": "1.0.0",
   "description": ".- -.. .- ... - .-. .- .-. . . .-. .- ...",
-  "main": "index.js",
+  "main": "app.js",
   "dependencies": {
-    "choo": "^6.10.3",
-    "simple-get": "^2.7.0"
+    "choo": "^6.10.3"
   },
   "devDependencies": {
-    "bankai": "^8.1.0"
+    "electron": "1.8.4"
   },
   "scripts": {
-    "start": "bankai start -p 3000"
+    "start": "electron app.js"
   },
   "repository": {
     "type": "git",

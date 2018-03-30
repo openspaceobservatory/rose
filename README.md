@@ -15,7 +15,7 @@ $ npm install
 $ npm start
 ```
 
-`bankai` will spin up a local development server at `http://localhost:8080`.
+Dev environment utilises `electron`. To reload the application, press `Cmd+R`.
 
 ## Notes
 

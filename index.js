@@ -6,8 +6,4 @@ app.use(require('./state/stations'))
 
 app.route('/', require('./templates/example'))
 
-if (module.parent) {
-  module.exports = app
-} else {
-  app.mount('body')
-}
+document.body.appendChild(app.start())
