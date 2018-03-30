@@ -1,0 +1,25 @@
+{
+  "name": "rose",
+  "version": "1.0.0",
+  "description": ".- -.. .- ... - .-. .- .-. . . .-. .- ...",
+  "main": "index.js",
+  "dependencies": {
+    "choo": "^6.10.3"
+  },
+  "devDependencies": {
+    "bankai": "^9.10.4"
+  },
+  "scripts": {
+    "start": "bankai start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/openspaceobservatory/rose.git"
+  },
+  "author": "open space observatory",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/openspaceobservatory/rose/issues"
+  },
+  "homepage": "https://github.com/openspaceobservatory/rose#readme"
+}
