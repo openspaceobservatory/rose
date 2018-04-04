@@ -30,6 +30,8 @@ function stations (state, emitter) {
         if ((i + 1) === body.length && body.length === 25) {
           pageCounter++
           queryStations()
+        } else {
+          emitter.emit('render')
         }
       })
     })

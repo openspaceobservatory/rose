@@ -51,6 +51,7 @@ function observations (state, emitter) {
             queryObservations()
           } else {
             pageCounter = 1
+            emitter.emit('render')
           }
         }
       })

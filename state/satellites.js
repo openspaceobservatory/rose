@@ -24,6 +24,8 @@ function satellites (state, emitter) {
       body.forEach(function (satellite, i) {
         var {id} = satellite
         state.satellites.byId[id] = satellite
+
+        if (i + 1 === body.length) emitter.emit('render')
       })
     })
   }
