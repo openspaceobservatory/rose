@@ -1,15 +1,12 @@
 var xhr = require('xhr')
 
-module.exports = observations
+module.exports = api
 
-function observations (state, emitter) {
-  state.observations = {}
-
-  state.observations.byId = {}
-  state.observations.ordered = []
-
+function api (state, emitter) {
   var pageCounter = 1
   const maxPages = 25
+
+  var stationPageCounter = 1
 
   queryObservations()
   setInterval(queryObservations, 60000)
@@ -26,22 +23,7 @@ function observations (state, emitter) {
 
       body.forEach(function (observation, i) {
         if (observation.vetted_status === 'good') {
-          var {id, start} = observation
-
-          if (!state.observations.byId[id]) {
-            var ordered = state.observations.ordered
-            state.observations.byId[id] = observation
-
-            var newStart = new Date(observation.start)
-
-            var found = ordered.findIndex(function (oldObservation, index) {
-              var oldStart = new Date(oldObservation.start)
-              return (oldStart < newStart)
-            })
-
-            if (found === -1) found = ordered.length
-            ordered.splice(found, 0, observation)
-          }
+          emitter.emit('observations:add', observation)
         }
 
         if ((i + 1) === body.length) {
