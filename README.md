@@ -15,7 +15,9 @@ $ npm install
 $ npm start
 ```
 
-Dev environment utilises `electron`. To reload the application, press `Cmd+R`.
+Dev environment utilises `electron`.
+
+You can use the `Cmd+Shift+1`, `Cmd+Shift+2`, and `Cmd+Shift+3` shortcuts to reload screens 1, 2 and 3 respectively.
 
 ## Notes
 
