@@ -4,8 +4,6 @@
   "description": ".- -.. .- ... - .-. .- .-. . . .-. .- ...",
   "main": "app.js",
   "dependencies": {
-    "choo": "^6.10.3",
-    "choo-devtools": "^2.5.0",
     "xhr": "^2.4.1"
   },
   "devDependencies": {
