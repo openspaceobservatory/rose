@@ -15,7 +15,7 @@ app.on('ready', function () {
     height: 600,
   })
 
-  win.loadURL('file://' + path.join(__dirname, 'index.html'))
+  win.loadURL('file://' + path.join(__dirname, 'screen-2.html'))
 
   win.on('close', function () {
     win = null
@@ -28,10 +28,24 @@ app.on('ready', function () {
       label: 'Rose',
       submenu: [
         {
-          label: 'Reload',
-          accelerator: 'CmdOrCtrl+R',
+          label: 'Load Screen #1',
+          accelerator: 'CmdOrCtrl+Shift+1',
           click (item, win, event) {
-            win.loadURL('file://' + path.join(__dirname, 'index.html'))
+            win.loadURL('file://' + path.join(__dirname, 'screen-1.html'))
+          }
+        },
+        {
+          label: 'Load Screen #2',
+          accelerator: 'CmdOrCtrl+Shift+2',
+          click (item, win, event) {
+            win.loadURL('file://' + path.join(__dirname, 'screen-2.html'))
+          }
+        },
+        {
+          label: 'Load Screen #3',
+          accelerator: 'CmdOrCtrl+Shift+3',
+          click (item, win, event) {
+            win.loadURL('file://' + path.join(__dirname, 'screen-3.html'))
           }
         },
         {type: 'separator'},
