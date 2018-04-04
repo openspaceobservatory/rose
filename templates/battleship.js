@@ -27,10 +27,10 @@ function obsColor(obsTime) {
 
 function battleship (state, emit) {
 
-  var stationNames = state.stations.map(x => x["name"])
+  var stationNames = state.stations.ordered.map(x => x["name"])
   var xScale = initXScale(stationNames)
 
-  var satelliteCatIds = state.satellites.map(x => x["norad_cat_id"])
+  var satelliteCatIds = state.satellites.ordered.map(x => x["norad_cat_id"])
   var yScale = initYScale(satelliteCatIds)
 
   var svgContainer = d3.select("body")
@@ -40,7 +40,7 @@ function battleship (state, emit) {
                        .attr("height", 850)
 
   svgContainer.selectAll(".station")
-              .data(state.stations)
+              .data(state.stations.ordered)
               .enter()
               .append("circle")
               .attr("class", "station")
@@ -50,7 +50,7 @@ function battleship (state, emit) {
               .attr("cy", 810)
 
   svgContainer.selectAll(".satellite")
-              .data(state.satellites)
+              .data(state.satellites.ordered)
               .enter()
               .append("circle")
               .attr("class", "satellite")
@@ -60,7 +60,7 @@ function battleship (state, emit) {
               .attr("cy", d => yScale(d.norad_cat_id))
 
   svgContainer.selectAll(".observation")
-              .data(state.observations)
+              .data(state.observations.ordered)
               .enter()
               .append("circle")
               .attr("class", "observation")
