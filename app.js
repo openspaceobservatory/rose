@@ -29,21 +29,21 @@ app.on('ready', function () {
       submenu: [
         {
           label: 'Load Screen #1',
-          accelerator: 'CmdOrCtrl+Shift+1',
+          accelerator: 'CmdOrCtrl+1',
           click (item, win, event) {
             win.loadURL('file://' + path.join(__dirname, 'screen-1.html'))
           }
         },
         {
           label: 'Load Screen #2',
-          accelerator: 'CmdOrCtrl+Shift+2',
+          accelerator: 'CmdOrCtrl+2',
           click (item, win, event) {
             win.loadURL('file://' + path.join(__dirname, 'screen-2.html'))
           }
         },
         {
           label: 'Load Screen #3',
-          accelerator: 'CmdOrCtrl+Shift+3',
+          accelerator: 'CmdOrCtrl+3',
           click (item, win, event) {
             win.loadURL('file://' + path.join(__dirname, 'screen-3.html'))
           }
