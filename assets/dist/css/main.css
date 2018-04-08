@@ -65,18 +65,7 @@ Screen 1
 
 #screen-1 .box-sat {
   width: 250px;
-  text-align: center;
-  /*height: 100px;
-		width: auto;
-		padding-top: 40px;
-		img {
-			display: inline;
-			margin-top: -40px;
-		}
-		span {
-			display: inline;
-			vertical-align: top;
-		}*/ }
+  text-align: center; }
   #screen-1 .box-sat img {
     display: block;
     margin: 0 auto;
