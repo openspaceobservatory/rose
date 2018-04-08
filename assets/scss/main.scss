@@ -1,0 +1,73 @@
+$color-sunrise: #FFCFA1;
+$color-sunrise-dark: #263836;
+$color-midday: #21E7D6;
+$color-midday-dark: #231E1E;
+$color-sunset: #D36A6A;
+$color-sunset-dark: #2B2020; 
+
+
+@import '../../node_modules/@ibm/plex/scss/ibm-plex.scss';
+
+
+
+/***************
+Global
+***************/
+html	 {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  letter-spacing: -0.01rem;
+}
+
+.name-sat {
+	color: #fff;
+	font-size: 20px;
+	font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+	line-height: 19px;
+}
+
+.name-station-active {
+	color: #fff;
+	font-size: 20px;
+	font-family: 'IBM Plex Sans Medium', 'Helvetica Neue', Arial, sans-serif;
+	line-height: 19px;
+}
+
+.description-axis {
+	color: #FFFFFF;
+	font-size: 24px;
+	font-family: 'IBM Plex Mono', 'Menlo', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', Courier, monospace;
+	line-height: 32px;
+}
+
+.description-sat-img {
+	color: #FFFFFF;
+	font-size: 22px;
+	font-family: 'IBM Plex Sans', 'Helvetica Neue', Arial, sans-serif;
+	line-height: 26px;
+}
+
+/***************
+Screen 1
+***************/
+.screen-1 {
+	background: linear-gradient(to right, $color-sunrise-dark, $color-sunrise);
+}
+
+.sphere {
+	position: absolute;
+	width: 100vw;
+	height: 100vh;
+	background: radial-gradient(circle at 10% 225%, transparent 0%, transparent 40%, transparent 63%, #FFFFFF 65%, transparent 50%);
+}
+
+/***************
+Screen 2
+***************/
+.screen-2 {
+}
+
+/***************
+Screen 3
+***************/
+.screen-3 {
+}

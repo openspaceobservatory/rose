@@ -37,7 +37,7 @@ api(function () {
                    .domain([102800000,142800000]) // 48 hrs in milliseconds
                    .range([{color: "#0A0", opacity: 1},
                            {color: "#309", opacity: 0}])
-
+// Axes
   svgContainer.selectAll(".station")
               .data(window.state.stations)
               .enter()
@@ -57,7 +57,7 @@ api(function () {
               .attr("fill", "#888")
               .attr("cx", 25)
               .attr("cy", d => yScale(d.norad_cat_id))
-
+// Only redrawn aspect on data updates
   svgContainer.selectAll(".observation")
               .data(window.state.observations)
               .enter()
