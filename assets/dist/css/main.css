@@ -5,6 +5,9 @@ body {
   font-family: 'IBM Plex Sans', monospace;
   color: #fff; }
 
+p {
+  margin: 0; }
+
 .name-sat {
   color: #fff;
   font-size: 20px;
@@ -35,6 +38,14 @@ Screen 1
 ***************/
 .screen-1 {
   background: linear-gradient(to right, #263836, #FFCFA1); }
+  .screen-1 .box-station {
+    width: 200px;
+    text-align: center; }
+    .screen-1 .box-station img {
+      display: block;
+      margin: 0 auto; }
+    .screen-1 .box-station p {
+      margin-top: -25px; }
 
 .sphere {
   position: absolute;
