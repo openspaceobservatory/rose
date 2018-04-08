@@ -50,6 +50,69 @@ body	 {
 	line-height: 26px;
 }
 
+/* Marquee */
+.marquee {
+	height: 50px;
+	overflow: hidden;
+	position: relative;
+}
+.marquee p {
+	background: -webkit-linear-gradient($color-midday,$color-midday-dark);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: 42px;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	line-height: 50px;
+	text-align: center;
+	/* Starting position */
+	-moz-transform: translateX(-100%);
+	-webkit-transform: translateX(-100%);
+	transform: translateX(-100%);
+	/* Apply animation to this element */
+	-moz-animation: marquee 20s linear infinite;
+	-webkit-animation: marquee 20s linear infinite;
+	animation: marquee 20s linear infinite;
+}
+
+/* Move it (define the animation) */
+
+@-moz-keyframes marquee {
+	0% {
+		-moz-transform: translateX(-100%);
+	}
+	100% {
+		-moz-transform: translateX(100%);
+	}
+}
+@-webkit-keyframes marquee {
+	0% {
+		-webkit-transform: translateX(-100%);
+	}
+	100% {
+		-webkit-transform: translateX(100%);
+	}
+}
+@keyframes marquee {
+	0% {
+		-moz-transform: translateX(-100%);
+		/* Firefox bug fix */
+		-webkit-transform: translateX(-100%);
+		/* Firefox bug fix */
+		transform: translateX(-100%);
+	}
+	100% {
+		-moz-transform: translateX(100%);
+		/* Firefox bug fix */
+		-webkit-transform: translateX(100%);
+		/* Firefox bug fix */
+		transform: translateX(100%);
+	}
+}
+
+
 /***************
 Screen 1
 ***************/
@@ -108,7 +171,7 @@ Screen 1
 	}
 	#box-constellations {
 		position: absolute;
-		top: 25px;
+		top: 50px;
 		right: 25px;
 		width: 400px;
 		height: 300px;

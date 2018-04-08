@@ -25,10 +25,10 @@ var svgContainer = d3.select("#content")
                      .attr("height", y)
 
 svgContainer.append('svg:image')
-            .attr('x', 0)
-            .attr('y', 0)
-            .attr('width', '75%')
-            .attr('height', '75%')
+  .attr('x', 0)
+  .attr('y', 0)
+  .attr('width', '75%')
+  .attr('height', '75%')
 
 var apiCounter = 0
 api(function () {
@@ -38,22 +38,22 @@ api(function () {
 
   // update d3!
   svgContainer.select('image')
-              .data(window.state.observations)
-              .filter(function (d, i) {
-                return i === 0
-              })
-              .attr('xlink:href', function (d) {
-                if (d.demoddata.length > 1) {
-                  var entry = d.demoddata[0]
-                  var ext = fileExtension(entry)
+    .data(window.state.observations)
+    .filter(function (d, i) {
+      return i === 0
+    })
+    .attr('xlink:href', function (d) {
+      if (d.demoddata.length > 1) {
+        var entry = d.demoddata[0]
+        var ext = fileExtension(entry)
 
-                  if (isImage(ext)) {
-                    return entry
-                  } else {
-                    return d.waterfall
-                  }
-                } else {
-                  return d.waterfall
-                }
-              })
+        if (isImage(ext)) {
+          return entry
+        } else {
+          return d.waterfall
+        }
+      } else {
+        return d.waterfall
+      }
+    })
 })
