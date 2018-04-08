@@ -4,6 +4,7 @@
   "description": ".- -.. .- ... - .-. .- .-. . . .-. .- ...",
   "main": "app.js",
   "dependencies": {
+    "@ibm/plex": "^1.0.1",
     "xhr": "^2.4.1"
   },
   "devDependencies": {
