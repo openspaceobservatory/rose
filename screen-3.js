@@ -9,12 +9,20 @@ window.state = {
   stations: []
 }
 
+// Set widths
+var w = window,
+    d = document,
+    e = d.documentElement,
+    g = d.getElementsByTagName('body')[0],
+    x = w.innerWidth || e.clientWidth || g.clientWidth,
+    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
 // initialise d3
 var svgContainer = d3.select("#content")
                      .append("svg")
                      .attr("class", "battleship")
-                     .attr("width", 640)
-                     .attr("height", 850)
+                     .attr("width", x)
+                     .attr("height", y)
 
 svgContainer.append('svg:image')
             .attr('x', 0)

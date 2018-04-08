@@ -6,6 +6,17 @@ window.state = {
   stations: []
 }
 
+// Set widths
+var w = window,
+    d = document,
+    e = d.documentElement,
+    g = d.getElementsByTagName('body')[0],
+    x = w.innerWidth || e.clientWidth || g.clientWidth,
+    y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+
+// Axes outer margin
+var axesMargin = 200;
+
 var apiCounter = 0
 
 api(function () {
@@ -23,20 +34,20 @@ api(function () {
   function initXScale (cats) {
     return d3.scaleBand()
              .domain(cats)
-             .range([50, 600])
+             .range([axesMargin + 18, x-axesMargin - 18])
   }
 
   function initYScale (cats) {
     return d3.scaleBand()
              .domain(cats)
-             .range([10, 800])
+             .range([axesMargin, y-axesMargin])
   }
 
   // "d3 app"
   var obsScale = d3.scaleLinear()
                    .domain([102800000,142800000]) // 48 hrs in milliseconds
-                   .range([{color: "#0A0", opacity: 1},
-                           {color: "#309", opacity: 0}])
+                   .range([{color: "#fff", opacity: 1},
+                           {color: "#fff", opacity: 0}])
 // Axes
   svgContainer.selectAll(".station")
               .data(window.state.stations)
@@ -44,9 +55,9 @@ api(function () {
               .append("circle")
               .attr("class", "station")
               .attr("r", 3)
-              .attr("fill", "#26A")
+              .attr("fill", "#fff")
               .attr("cx", d => xScale(d.name))
-              .attr("cy", 810)
+              .attr("cy", y-axesMargin - 4)
 
   svgContainer.selectAll(".satellite")
               .data(window.state.satellites)
@@ -54,9 +65,32 @@ api(function () {
               .append("circle")
               .attr("class", "satellite")
               .attr("r", 1)
-              .attr("fill", "#888")
-              .attr("cx", 25)
+              .attr("fill", "#fff")
+              .attr("cx", axesMargin)
               .attr("cy", d => yScale(d.norad_cat_id))
+
+// Text label for the X axis
+svgContainer.append("text")             
+  .attr("transform",
+        "translate(" + (x/2) + " ," + 
+                       (y - axesMargin/3) + ")")
+  .style("text-anchor", "middle")
+  .attr("fill", "#fff")
+  .attr('class','description-axis')
+  .text("Ground Stations")
+
+// Text label for the Y axis
+svgContainer.append("text")
+  .attr("transform", "translate(0,0)")
+  .attr("transform", "rotate(-90)")
+  .attr("y", axesMargin/3)
+  .attr("x", 0 - y/2)
+  .style("text-anchor", "middle")
+  .attr("fill", "#fff")
+  .attr('class','description-axis')
+  .text("Satellites");     
+
+
 // Only redrawn aspect on data updates
   svgContainer.selectAll(".observation")
               .data(window.state.observations)
@@ -84,5 +118,6 @@ api(function () {
 var svgContainer = d3.select("#content")
                      .append("svg")
                      .attr("class", "battleship")
-                     .attr("width", 640)
-                     .attr("height", 850)
+                     .attr("width", x)
+                     .attr("height", y);
+
