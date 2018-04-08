@@ -12,10 +12,8 @@ Global
 body	 {
 	font-family: 'IBM Plex Sans', monospace;
 	color: #fff;
-}
-
-p {
-	margin: 0;
+	width: 100vw;
+	height: 100vh;
 }
 
 .name-sat {
@@ -52,16 +50,41 @@ Screen 1
 ***************/
 .screen-1 {
 	background: linear-gradient(to right, $color-sunrise-dark, $color-sunrise);
-	.box-station {
-		width: 200px;
-		text-align: center;
+	// Bounding box where ground stations appear
+	.box-stations {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 40%;
+		height: 40%;
+	}
+	// Bounding box for individual satellite or station
+	.box-icon {
+		height: 100px;
+		width: auto;
+		padding-top: 40px;
 		img {
-			display: block;
-			margin: 0 auto;
+			display: inline;
+			margin-top: -40px;
 		}
-		p {
-			margin-top: -25px;
+		span {
+			display: inline;
+			vertical-align: top;
 		}
+	}
+	// Example position - DELETE THIS
+	#test-sat {
+		position: absolute;
+		margin-left: 250px;
+		margin-top: 117px;
+	}
+	#box-constellations {
+		position: absolute;
+		top: 25px;
+		right: 25px;
+		width: 400px;
+		height: 300px;
+		border: 1px solid #fff;
 	}
 }
 

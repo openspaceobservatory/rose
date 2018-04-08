@@ -3,10 +3,9 @@ Global
 ***************/
 body {
   font-family: 'IBM Plex Sans', monospace;
-  color: #fff; }
-
-p {
-  margin: 0; }
+  color: #fff;
+  width: 100vw;
+  height: 100vh; }
 
 .name-sat {
   color: #fff;
@@ -38,14 +37,33 @@ Screen 1
 ***************/
 .screen-1 {
   background: linear-gradient(to right, #263836, #FFCFA1); }
-  .screen-1 .box-station {
-    width: 200px;
-    text-align: center; }
-    .screen-1 .box-station img {
-      display: block;
-      margin: 0 auto; }
-    .screen-1 .box-station p {
-      margin-top: -25px; }
+  .screen-1 .box-stations {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40%;
+    height: 40%; }
+  .screen-1 .box-icon {
+    height: 100px;
+    width: auto;
+    padding-top: 40px; }
+    .screen-1 .box-icon img {
+      display: inline;
+      margin-top: -40px; }
+    .screen-1 .box-icon span {
+      display: inline;
+      vertical-align: top; }
+  .screen-1 #test-sat {
+    position: absolute;
+    margin-left: 250px;
+    margin-top: 117px; }
+  .screen-1 #box-constellations {
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    width: 400px;
+    height: 300px;
+    border: 1px solid #fff; }
 
 .sphere {
   position: absolute;

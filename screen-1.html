@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>rose</title>
+	<title>ROSE</title>
 	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Sans:400,500,500i&amp;subset=latin-ext" rel="stylesheet">
 	<link href="assets/dist/css/normalize.css" rel="stylesheet">
 	<link href="assets/dist/css/main.css" rel="stylesheet">
@@ -11,15 +11,30 @@
 <body class="screen-1">
 	<div class="sphere"></div>
 	<div id="content">
+		<!--  Bounding box where ground stations appear -->
 		<div class="box-stations">
-			<div class="box-station">
+			<div class="box-icon">
 				<img src="assets/dist/img/ground-station-active.png">
-				<p class="name-station">The Future Starts Here<br>
-				41.7, 54.2<br>
-				London, UK</p>
+				<span class="name-station">The Future Starts Here, 41.5, 52.7, London, UK</span>
 			</div>
 		</div>
+
+		<!--  Bounding box where satellites appear -->
+		<div class="box-sats">
+			<div id="test-sat" class="box-icon">
+				<img src="assets/dist/img/cubesat1.png">
+				<span class="name-sat">NOAA 18, Other Information</span>
+			</div>
+		</div>
+
+		<div id="box-constellations">
+			<!-- Constellations appear here -->
+		</div>
+	<!-- /content -->
 	</div>
+
+
+
 	<script src="screen-1.js">
 	</script>
 </body>
