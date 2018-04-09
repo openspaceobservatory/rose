@@ -27,7 +27,8 @@ api(function () {
 
 
   // update background color
-  updateBgColor(window.state.weather.sunrise, window.state.weather.sunset)
+  var d = new Date()
+  updateBgColor(d, window.state.weather.sunrise, window.state.weather.sunset)
 
 	// update d3!
 	var stationNames = window.state.stations.map(x => x["name"])

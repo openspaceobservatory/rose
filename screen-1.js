@@ -15,7 +15,8 @@ api(function () {
   if (apiCounter < 4) return
 
   // update background color
-  updateBgColor(window.state.weather.sunrise, window.state.weather.sunset)
+  var d = new Date()
+  updateBgColor(d, window.state.weather.sunrise, window.state.weather.sunset)
 
   // update d3!
 })
