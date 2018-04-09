@@ -1,6 +1,7 @@
 var fileExtension = require('file-extension')
 
 var api = require('./lib/api')
+var countdown = require('./lib/countdown')
 var isImage = require('./lib/is-image')
 
 window.state = {
@@ -20,13 +21,18 @@ var w = window,
 var imageIndex = 0
 var renderFlag = false
 
-var img = d.getElementById('satellite-image')
+var el_img = d.getElementById('satellite-image')
+var el_countdown = d.getElementById('countdown')
 
 api(function () {
   if (!renderFlag) {
     renderFlag = true
     render()
   }
+})
+
+countdown(function (time) {
+  el_countdown.innerText = `Time until new satellite data: ${time}`
 })
 
 function render () {
@@ -36,7 +42,7 @@ function render () {
 
 function renderImage () {
   var observation = w.state.observations[imageIndex]
-  img.src = source()
+  el_img.src = source()
 
   if (imageIndex === 49) {
     imageIndex = 0
@@ -52,6 +58,10 @@ function renderImage () {
       if (isImage(ext)) return entry
     }
 
-    return observation.waterfall
+    if (observation.waterfall) {
+      return observation.waterfall
+    } else {
+      return renderImage()
+    }
   }
 }
