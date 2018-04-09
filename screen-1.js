@@ -10,14 +10,6 @@ window.state = {
 var apiCounter = 0
 
 api(function () {
-  // don't touch
-  apiCounter++
-  if (apiCounter < 4) return
-
-  // update background color
-  var d = new Date()
-  updateBgColor(d, window.state.weather.sunrise, window.state.weather.sunset)
-
   // update d3!
 })
 
