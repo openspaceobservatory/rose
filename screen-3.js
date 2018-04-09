@@ -34,7 +34,7 @@ var apiCounter = 0
 api(function () {
   // don't touch
   apiCounter++
-  if (apiCounter < 3) return
+  if (apiCounter < 4) return
 
   // update d3!
   svgContainer.select('image')

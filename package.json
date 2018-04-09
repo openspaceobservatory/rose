@@ -12,7 +12,7 @@
     "node-sass": "^4.8.3"
   },
   "scripts": {
-    "start": "electron app.js",
+    "start": "source .env && electron app.js",
     "sass-watch": "node-sass --watch assets/scss -o assets/dist/css"
   },
   "repository": {

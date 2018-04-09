@@ -1,4 +1,5 @@
 var api = require('./lib/api')
+var updateBgColor = require('./lib/background-color')
 
 window.state = {
 	observations: [],
@@ -22,7 +23,11 @@ var apiCounter = 0
 api(function () {
 	// don't touch
 	apiCounter++
-	if (apiCounter < 3) return
+	if (apiCounter < 4) return
+
+
+  // update background color
+  updateBgColor(window.state.weather.sunrise, window.state.weather.sunset)
 
 	// update d3!
 	var stationNames = window.state.stations.map(x => x["name"])
