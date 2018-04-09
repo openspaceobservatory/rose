@@ -1,4 +1,5 @@
 var api = require('./lib/api')
+var updateBgColor = require('./lib/background-color')
 
 window.state = {
   observations: [],
