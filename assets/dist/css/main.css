@@ -3,29 +3,32 @@ Global
 ***************/
 body {
   font-family: 'IBM Plex Sans', monospace;
-  color: #fff; }
-
-p {
-  margin: 0; }
+  color: #fff;
+  width: 100vw;
+  height: 100vh; }
 
 .name-sat {
   color: #fff;
   font-size: 20px;
-  font-family: 'IBM Plex Mono', monospace;
-  line-height: 19px; }
+  font-family: 'IBM Plex Sans', monospace;
+  line-height: 28px; }
 
-.name-station-active {
+.name-station {
   color: #fff;
   font-size: 20px;
   font-family: 'IBM Plex Sans', sans-serif;
   font-weight: 500;
-  line-height: 19px; }
+  line-height: 28px; }
 
 .description-axis {
-  color: #FFFFFF;
+  color: #fff;
   font-size: 24px;
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'IBM Plex Sans', monospace;
   line-height: 32px; }
+
+.description-icon {
+  font-style: italic;
+  font-weight: 300; }
 
 .description-sat-img {
   color: #FFFFFF;
@@ -33,19 +36,115 @@ p {
   font-family: 'IBM Plex Sans', sans-serif;
   line-height: 26px; }
 
+/* Marquee */
+.marquee {
+  height: 50px;
+  overflow: hidden;
+  position: relative; }
+
+.marquee p {
+  background: -webkit-linear-gradient(#21E7D6, #231E1E);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 42px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  line-height: 50px;
+  text-align: center;
+  /* Starting position */
+  -moz-transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+  /* Apply animation to this element */
+  -moz-animation: marquee 20s linear infinite;
+  -webkit-animation: marquee 20s linear infinite;
+  animation: marquee 20s linear infinite; }
+
+/* Move it (define the animation) */
+@-moz-keyframes marquee {
+  0% {
+    -moz-transform: translateX(-100%); }
+  100% {
+    -moz-transform: translateX(100%); } }
+
+@-webkit-keyframes marquee {
+  0% {
+    -webkit-transform: translateX(-100%); }
+  100% {
+    -webkit-transform: translateX(100%); } }
+
+@keyframes marquee {
+  0% {
+    -moz-transform: translateX(-100%);
+    /* Firefox bug fix */
+    -webkit-transform: translateX(-100%);
+    /* Firefox bug fix */
+    transform: translateX(-100%); }
+  100% {
+    -moz-transform: translateX(100%);
+    /* Firefox bug fix */
+    -webkit-transform: translateX(100%);
+    /* Firefox bug fix */
+    transform: translateX(100%); } }
+
 /***************
 Screen 1
 ***************/
-.screen-1 {
-  background: linear-gradient(to right, #263836, #FFCFA1); }
-  .screen-1 .box-station {
-    width: 200px;
-    text-align: center; }
-    .screen-1 .box-station img {
-      display: block;
-      margin: 0 auto; }
-    .screen-1 .box-station p {
-      margin-top: -25px; }
+#screen-1.sunrise {
+  background: linear-gradient(to right, #263836, #FFCFA1 300%); }
+
+#screen-1.midday {
+  background: linear-gradient(to right, #231E1E, #21E7D6 200%); }
+
+#screen-1.sunset {
+  background: linear-gradient(to right, #D36A6A, #263836 300%); }
+
+#screen-1 .box-stations {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 40%;
+  height: 40%; }
+
+#screen-1 .box-station {
+  width: 250px;
+  text-align: center; }
+  #screen-1 .box-station img {
+    display: block;
+    margin: 0 auto;
+    margin-bottom: -20px; }
+
+#screen-1 .box-sat {
+  width: 250px;
+  text-align: center; }
+  #screen-1 .box-sat img {
+    display: block;
+    margin: 0 auto;
+    margin-top: -10px; }
+
+#screen-1 #test-sat1 {
+  position: absolute;
+  left: 750px;
+  top: 400px; }
+
+#screen-1 #test-sat2 {
+  position: absolute;
+  left: 250px;
+  top: 200px; }
+
+#screen-1 #test-station {
+  margin-left: 150px;
+  margin-top: 30px; }
+
+#screen-1 #box-constellations {
+  position: absolute;
+  top: 50px;
+  right: 25px;
+  width: 400px;
+  height: 300px;
+  border: 1px solid #fff; }
 
 .sphere {
   position: absolute;
@@ -56,6 +155,23 @@ Screen 1
 /***************
 Screen 2
 ***************/
+#screen-2.sunrise {
+  background: linear-gradient(to right, #263836 -100%, #FFCFA1 200%); }
+
+#screen-2.midday {
+  background: linear-gradient(to right, #231E1E -100%, #21E7D6 100%); }
+
+#screen-2.sunset {
+  background: linear-gradient(to right, #D36A6A -100%, #263836 200%); }
+
 /***************
 Screen 3
 ***************/
+#screen-3.sunrise {
+  background: linear-gradient(to right, #263836 -200%, #FFCFA1 100%); }
+
+#screen-3.midday {
+  background: linear-gradient(to right, #21E7D6, #231E1E 200%); }
+
+#screen-3.sunset {
+  background: linear-gradient(to right, #D36A6A -200%, #263836 100%); }

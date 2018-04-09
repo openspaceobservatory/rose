@@ -1,25 +1,56 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>rose</title>
-	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Sans:400,500,500i&amp;subset=latin-ext" rel="stylesheet">
+	<title>ROSE</title>
+	<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:400,400i|IBM+Plex+Sans:300i,400,500,500i&amp;subset=latin-ext" rel="stylesheet">
 	<link href="assets/dist/css/normalize.css" rel="stylesheet">
 	<link href="assets/dist/css/main.css" rel="stylesheet">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.13.0/d3.min.js">
 	</script>
 </head>
-<body class="screen-1">
+<body id="screen-1" class="midday">
+
+	<div class="marquee">
+		<p class="description-axis">AWAITING RECEPTION</p>
+	</div>
+	
+	<!-- Sphere -->
 	<div class="sphere"></div>
+
+
 	<div id="content">
+		<!--  Bounding box where ground stations appear -->
 		<div class="box-stations">
-			<div class="box-station">
+			<div id="test-station" class="box-station">
 				<img src="assets/dist/img/ground-station-active.png">
-				<p class="name-station">The Future Starts Here<br>
-				41.7, 54.2<br>
-				London, UK</p>
+				<span class="name-station">The Future Starts Here</span><br><span class="description-icon">41.5, 52.7, London, UK</span>
 			</div>
 		</div>
+
+		<!--  Bounding box where satellites appear -->
+		<div class="box-sats">
+			<div id="test-sat1" class="box-sat">
+				<span class="name-sat">NOAA 18</span><br><span class="description-icon">Origin Information</span>
+				<img src="assets/dist/img/cubesat1.png">
+			</div>
+		</div>
+
+		<div class="box-sats">
+			<div id="test-sat2" class="box-sat">
+				<span class="name-sat">SpydySat</span><br><span class="description-icon">Origin Information</span>
+				<img src="assets/dist/img/cubesat2.png">
+			</div>
+		</div>
+
+
+		<div id="box-constellations">
+			<!-- Constellations appear here -->
+		</div>
+	<!-- /content -->
 	</div>
+
+
+
 	<script src="screen-1.js">
 	</script>
 </body>

@@ -12,32 +12,35 @@ Global
 body	 {
 	font-family: 'IBM Plex Sans', monospace;
 	color: #fff;
-}
-
-p {
-	margin: 0;
+	width: 100vw;
+	height: 100vh;
 }
 
 .name-sat {
 	color: #fff;
 	font-size: 20px;
-	font-family: 'IBM Plex Mono', monospace;
-	line-height: 19px;
+	font-family: 'IBM Plex Sans', monospace;
+	line-height: 28px;
 }
 
-.name-station-active {
+.name-station {
 	color: #fff;
 	font-size: 20px;
 	font-family: 'IBM Plex Sans', sans-serif;
 	font-weight: 500;
-	line-height: 19px;
+	line-height: 28px;
 }
 
 .description-axis {
-	color: #FFFFFF;
+	color: #fff;
 	font-size: 24px;
-	font-family: 'IBM Plex Mono', monospace;
+	font-family: 'IBM Plex Sans', monospace;
 	line-height: 32px;
+}
+
+.description-icon {
+	font-style: italic;
+	font-weight: 300;
 }
 
 .description-sat-img {
@@ -47,21 +50,132 @@ p {
 	line-height: 26px;
 }
 
+/* Marquee */
+.marquee {
+	height: 50px;
+	overflow: hidden;
+	position: relative;
+}
+.marquee p {
+	background: -webkit-linear-gradient($color-midday,$color-midday-dark);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: 42px;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	margin: 0;
+	line-height: 50px;
+	text-align: center;
+	/* Starting position */
+	-moz-transform: translateX(-100%);
+	-webkit-transform: translateX(-100%);
+	transform: translateX(-100%);
+	/* Apply animation to this element */
+	-moz-animation: marquee 20s linear infinite;
+	-webkit-animation: marquee 20s linear infinite;
+	animation: marquee 20s linear infinite;
+}
+
+/* Move it (define the animation) */
+
+@-moz-keyframes marquee {
+	0% {
+		-moz-transform: translateX(-100%);
+	}
+	100% {
+		-moz-transform: translateX(100%);
+	}
+}
+@-webkit-keyframes marquee {
+	0% {
+		-webkit-transform: translateX(-100%);
+	}
+	100% {
+		-webkit-transform: translateX(100%);
+	}
+}
+@keyframes marquee {
+	0% {
+		-moz-transform: translateX(-100%);
+		/* Firefox bug fix */
+		-webkit-transform: translateX(-100%);
+		/* Firefox bug fix */
+		transform: translateX(-100%);
+	}
+	100% {
+		-moz-transform: translateX(100%);
+		/* Firefox bug fix */
+		-webkit-transform: translateX(100%);
+		/* Firefox bug fix */
+		transform: translateX(100%);
+	}
+}
+
+
 /***************
 Screen 1
 ***************/
-.screen-1 {
-	background: linear-gradient(to right, $color-sunrise-dark, $color-sunrise);
+#screen-1.sunrise {
+	background: linear-gradient(to right, $color-sunrise-dark, $color-sunrise 300%);
+}
+#screen-1.midday {
+	background: linear-gradient(to right, $color-midday-dark, $color-midday 200%);
+}
+#screen-1.sunset {
+	background: linear-gradient(to right, $color-sunset, $color-sunrise-dark 300%);
+}
+#screen-1 {
+	// Bounding box where ground stations appear
+	.box-stations {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 40%;
+		height: 40%;
+	}
+	// Bounding box for individual station
 	.box-station {
-		width: 200px;
+		width: 250px;
 		text-align: center;
 		img {
 			display: block;
 			margin: 0 auto;
+			margin-bottom: -20px;
 		}
-		p {
-			margin-top: -25px;
+	}
+	// Bounding box for individual satellite
+	.box-sat {
+		width: 250px;
+		text-align: center;
+		img {
+			display: block;
+			margin: 0 auto;
+			margin-top: -10px;
 		}
+	}
+	// Example position - DELETE THIS
+	#test-sat1 {
+		position: absolute;
+		left: 750px;
+		top: 400px;
+	}
+	#test-sat2 {
+		position: absolute;
+		left: 250px;
+		top: 200px;
+	}
+	#test-station {
+		margin-left: 150px;
+		margin-top: 30px;
+	}
+	#box-constellations {
+		position: absolute;
+		top: 50px;
+		right: 25px;
+		width: 400px;
+		height: 300px;
+		border: 1px solid #fff;
 	}
 }
 
@@ -72,14 +186,32 @@ Screen 1
 	background: radial-gradient(circle at 10% 225%, transparent 0%, transparent 40%, transparent 63%, #FFFFFF 65%, transparent 50%);
 }
 
+
 /***************
 Screen 2
 ***************/
-.screen-2 {
+#screen-2.sunrise {
+	background: linear-gradient(to right, $color-sunrise-dark -100%, $color-sunrise 200%);
 }
+#screen-2.midday {
+	background: linear-gradient(to right, $color-midday-dark -100%, $color-midday 100%);
+}
+#screen-2.sunset {
+	background: linear-gradient(to right, $color-sunset -100%, $color-sunrise-dark 200%);
+}
+
 
 /***************
 Screen 3
 ***************/
-.screen-3 {
+#screen-3.sunrise {
+	background: linear-gradient(to right, $color-sunrise-dark -200%, $color-sunrise 100%);
 }
+#screen-3.midday {
+	background: linear-gradient(to right, $color-midday, $color-midday-dark 200%);
+}
+#screen-3.sunset {
+	background: linear-gradient(to right, $color-sunset -200%, $color-sunrise-dark 100%);
+}
+
+
