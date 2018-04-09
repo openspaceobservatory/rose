@@ -20,10 +20,6 @@ var axesMargin = 200;
 var apiCounter = 0
 
 api(function () {
-	// don't touch
-	apiCounter++
-	if (apiCounter < 3) return
-
 	// update d3!
 	var stationNames = window.state.stations.map(x => x["name"])
 	var xScale = initXScale(stationNames)
@@ -70,9 +66,9 @@ api(function () {
 							.attr("cy", d => yScale(d.norad_cat_id))
 
 // Text label for the X axis
-svgContainer.append("text")             
+svgContainer.append("text")
 	.attr("transform",
-				"translate(" + (x/2) + " ," + 
+				"translate(" + (x/2) + " ," +
 											 (y - axesMargin/3) + ")")
 	.style("text-anchor", "middle")
 	.attr("fill", "#fff")
@@ -88,7 +84,7 @@ svgContainer.append("text")
 	.style("text-anchor", "middle")
 	.attr("fill", "#fff")
 	.attr('class','description-axis')
-	.text("Satellites");     
+	.text("Satellites");
 
 
 // Only redrawn aspect on data updates
@@ -120,4 +116,3 @@ var svgContainer = d3.select("#content")
 										 .attr("class", "battleship")
 										 .attr("width", x)
 										 .attr("height", y);
-

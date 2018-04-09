@@ -9,10 +9,6 @@ window.state = {
 var apiCounter = 0
 
 api(function () {
-  // don't touch
-  apiCounter++
-  if (apiCounter < 3) return
-
   // update d3!
 })
 

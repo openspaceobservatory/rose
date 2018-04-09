@@ -17,17 +17,12 @@ var w = window,
     x = w.innerWidth || e.clientWidth || g.clientWidth,
     y = w.innerHeight|| e.clientHeight|| g.clientHeight;
 
-var apiCounter = 0
 var imageIndex = 0
 var renderFlag = false
 
 var img = d.getElementById('satellite-image')
 
 api(function () {
-  // don't touch
-  apiCounter++
-  if (apiCounter < 3) return
-
   if (!renderFlag) {
     renderFlag = true
     render()
