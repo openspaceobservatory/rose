@@ -5,7 +5,6 @@ var isImage = require('./lib/is-image')
 
 window.state = {
   observations: [],
-  observationImages: [],
   satellites: [],
   stations: []
 }
@@ -22,44 +21,42 @@ var apiCounter = 0
 var imageIndex = 0
 var renderFlag = false
 
-var img = d.createElement('img')
-d.getElementById('content').appendChild(img)
+var img = d.getElementById('satellite-image')
 
 api(function () {
   // don't touch
   apiCounter++
   if (apiCounter < 3) return
 
-  var observations = w.state.observations
-  observations.forEach(function (observation, i) {
-    if (observation.demoddata.length > 1) {
-      var entry = observation.demoddata[0]
-      var ext = fileExtension(entry)
-
-      if (isImage(ext)) {
-        w.state.observationImages.push(entry)
-      } else {
-        w.state.observationImages.push(observation.waterfall)
-      }
-    } else {
-      w.state.observationImages.push(observation.waterfall)
-    }
-
-    if (i + 1 === observations.length) {
-      if (!renderFlag) {
-        renderFlag = true
-        render()
-      }
-    }
-  })
+  if (!renderFlag) {
+    renderFlag = true
+    render()
+  }
 })
 
 function render () {
-  renderLogic()
-  setInterval(renderLogic, 10000)
+  renderImage()
+  setInterval(renderImage, 10000)
 }
 
-function renderLogic () {
-  img.src = w.state.observationImages[imageIndex]
-  imageIndex++
+function renderImage () {
+  var observation = w.state.observations[imageIndex]
+  img.src = source()
+
+  if (imageIndex === 49) {
+    imageIndex = 0
+  } else {
+    imageIndex++
+  }
+
+  function source () {
+    if (observation.demoddata.length > 0) {
+      var entry = observation.demoddata[0].payload_demod
+      var ext = fileExtension(entry)
+
+      if (isImage(ext)) return entry
+    }
+
+    return observation.waterfall
+  }
 }
