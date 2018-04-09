@@ -3,7 +3,7 @@ $color-sunrise-dark: #263836;
 $color-midday: #21E7D6;
 $color-midday-dark: #231E1E;
 $color-sunset: #D36A6A;
-$color-sunset-dark: #2B2020; 
+$color-sunset-dark: #2B2020;
 
 
 /***************
@@ -213,5 +213,3 @@ Screen 3
 #screen-3.sunset {
 	background: linear-gradient(to right, $color-sunset -200%, $color-sunrise-dark 100%);
 }
-
-
