@@ -3,6 +3,7 @@ var fileExtension = require('file-extension')
 var api = require('./lib/api')
 var countdown = require('./lib/countdown')
 var isImage = require('./lib/is-image')
+var carousel = require('./lib/carousel')
 
 window.state = {
   observations: [],
@@ -47,20 +48,14 @@ function render () {
 }
 
 function renderImage () {
-  var observation = w.state.observations[imageIndex]
-  var satId = observation.norad_cat_id
-  var statName = observation.station_name
+  var thisObs = carousel.highlighted.observation
+  var thisSat = carousel.highlighted.station
+  var thisStation = carousel.highlighted.station
 
   el_img.src = source()
 
-  el_info_satellite.innerText = `Satellite: ${w.state.satellitesById[satId].name}`
-  el_info_station.innerText = `Observed by: ${w.state.stationsByName[statName].name}`
-
-  if (imageIndex === 49) {
-    imageIndex = 0
-  } else {
-    imageIndex++
-  }
+  el_info_satellite.innerText = `Satellite: ${thisSat.name}`
+  el_info_station.innerText = `Observed by: ${thisStation.name}`
 
   function source () {
     if (observation.demoddata.length > 0) {
