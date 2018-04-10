@@ -48,14 +48,13 @@ function render () {
 }
 
 function renderImage () {
-  var thisObs = carousel.highlighted.observation
-  var thisSat = carousel.highlighted.station
-  var thisStation = carousel.highlighted.station
+
+  var {observation, station, satellite} = carousel.highlighted()
 
   el_img.src = source()
 
-  el_info_satellite.innerText = `Satellite: ${thisSat.name}`
-  el_info_station.innerText = `Observed by: ${thisStation.name}`
+  el_info_satellite.innerText = `Satellite: ${satellite.name}`
+  el_info_station.innerText = `Observed by: ${station.name}`
 
   function source () {
     if (observation.demoddata.length > 0) {
