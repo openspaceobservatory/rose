@@ -144,26 +144,26 @@ Screen 1
       margin-bottom: -20px;
     }
   }
+
+  .box-station.highlighted {
+    border: 3px dashed #0C3
+  }
+
   // Bounding box for individual satellite
   .box-sat {
     width: 250px;
+    position: absolute;
     text-align: center;
+
     img {
       display: block;
       margin: 0 auto;
       margin-top: -10px;
     }
   }
-  // Example position - DELETE THIS
-  #test-sat1 {
-    position: absolute;
-    left: 750px;
-    top: 400px;
-  }
-  #test-sat2 {
-    position: absolute;
-    left: 250px;
-    top: 200px;
+
+  .box-sat.highlighted {
+    border: 3px dashed #0C3
   }
 
   #test-station {

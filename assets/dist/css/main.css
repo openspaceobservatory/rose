@@ -116,23 +116,20 @@ Screen 1
     margin: 0 auto;
     margin-bottom: -20px; }
 
+#screen-1 .box-station.highlighted {
+  border: 3px dashed #0C3; }
+
 #screen-1 .box-sat {
   width: 250px;
+  position: absolute;
   text-align: center; }
   #screen-1 .box-sat img {
     display: block;
     margin: 0 auto;
     margin-top: -10px; }
 
-#screen-1 #test-sat1 {
-  position: absolute;
-  left: 750px;
-  top: 400px; }
-
-#screen-1 #test-sat2 {
-  position: absolute;
-  left: 250px;
-  top: 200px; }
+#screen-1 .box-sat.highlighted {
+  border: 3px dashed #0C3; }
 
 #screen-1 #test-station {
   margin-left: 150px;
