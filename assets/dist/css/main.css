@@ -175,3 +175,7 @@ Screen 3
 
 #screen-3.sunset {
   background: linear-gradient(to right, #D36A6A -200%, #263836 100%); }
+
+#satellite-image {
+  max-height: 80vh;
+  max-width: 80vw; }
