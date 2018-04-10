@@ -3,6 +3,8 @@ var fileExtension = require('file-extension')
 var api = require('./lib/api')
 var countdown = require('./lib/countdown')
 var isImage = require('./lib/is-image')
+var carousel = require('./lib/carousel')
+var sync = require('./lib/sync')
 
 window.state = {
   observations: [],
@@ -33,7 +35,7 @@ var el_info_station = d.getElementById('info-station')
 api(function () {
   if (!renderFlag) {
     renderFlag = true
-    render()
+    sync.setHighlightInterval(renderImage)
   }
 })
 
@@ -41,26 +43,14 @@ countdown(function (time) {
   el_countdown.innerText = `Time until new satellite data: ${time}`
 })
 
-function render () {
-  renderImage()
-  setInterval(renderImage, 10000)
-}
-
 function renderImage () {
-  var observation = w.state.observations[imageIndex]
-  var satId = observation.norad_cat_id
-  var statName = observation.station_name
+
+  var {observation, station, satellite} = carousel.highlighted()
 
   el_img.src = source()
 
-  el_info_satellite.innerText = `Satellite: ${w.state.satellitesById[satId].name}`
-  el_info_station.innerText = `Observed by: ${w.state.stationsByName[statName].name}`
-
-  if (imageIndex === 49) {
-    imageIndex = 0
-  } else {
-    imageIndex++
-  }
+  el_info_satellite.innerText = `Satellite: ${satellite.name}`
+  el_info_station.innerText = `Observed by: ${station.name}`
 
   function source () {
     if (observation.demoddata.length > 0) {
