@@ -4,7 +4,11 @@ var updateBgColor = require('./lib/background-color')
 window.state = {
   observations: [],
   satellites: [],
-  stations: []
+  satellitesById: {},
+  satellitesByName: {},
+  stations: [],
+  stationsById: {},
+  stationsByName: {}
 }
 
 var apiCounter = 0

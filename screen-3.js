@@ -7,7 +7,11 @@ var isImage = require('./lib/is-image')
 window.state = {
   observations: [],
   satellites: [],
-  stations: []
+  satellitesById: {},
+  satellitesByName: {},
+  stations: [],
+  stationsById: {},
+  stationsByName: {}
 }
 
 // Set widths
@@ -23,6 +27,8 @@ var renderFlag = false
 
 var el_img = d.getElementById('satellite-image')
 var el_countdown = d.getElementById('countdown')
+var el_info_satellite = d.getElementById('info-satellite')
+var el_info_station = d.getElementById('info-station')
 
 api(function () {
   if (!renderFlag) {
@@ -42,7 +48,13 @@ function render () {
 
 function renderImage () {
   var observation = w.state.observations[imageIndex]
+  var satId = observation.norad_cat_id
+  var statName = observation.station_name
+
   el_img.src = source()
+
+  el_info_satellite.innerText = `Satellite: ${w.state.satellitesById[satId].name}`
+  el_info_station.innerText = `Observed by: ${w.state.stationsByName[statName].name}`
 
   if (imageIndex === 49) {
     imageIndex = 0

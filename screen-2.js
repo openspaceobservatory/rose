@@ -2,9 +2,13 @@ var api = require('./lib/api')
 var updateBgColor = require('./lib/background-color')
 
 window.state = {
-	observations: [],
-	satellites: [],
-	stations: []
+  observations: [],
+  satellites: [],
+  satellitesById: {},
+  satellitesByName: {},
+  stations: [],
+  stationsById: {},
+  stationsByName: {}
 }
 
 // Set widths
