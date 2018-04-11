@@ -57,7 +57,6 @@ function initializeD3() {
   var satelliteCatIds = window.state.satellites.map(x => x["norad_cat_id"])
   yScale = initYScale(satelliteCatIds)
 
-
   // Axes
   svgContainer.selectAll(".station")
               .data(window.state.stations)
@@ -102,11 +101,21 @@ function initializeD3() {
 }
 
 function observationColor(observation) {
-  if (carousel.observations().includes(observation)) {
+  if (carousel.highlighted().observation == observation) {
+    return "#F00"
+  } else if (carousel.observations().includes(observation)) {
     return "#00F"
   } else {
     return "white"
   }
+}
+
+function setHighlightedClass(observation) {
+  return carousel.highlighted().observation == observation
+}
+
+function setInCarouselClass(observation) {
+  return carousel.observations().includes(observation)
 }
 
 api(function () {
@@ -114,13 +123,17 @@ api(function () {
   console.log('drawing a new zone')
 
   // "d3 app"
+  //
+  var observations = window.state.observations.slice().reverse()
 
-  // Only redrawn aspect on data updates
+  // what to do for observations that are already present in the svg
   var d3Obs = svgContainer.selectAll(".observation")
-                          .data(window.state.observations)
+                          .data(observations)
 
+  // what to do for observations that are no longer in the dataset
   d3Obs.exit().remove()
 
+  // what to do for new observations
   d3ObsEnter = d3Obs.enter()
                     .append("circle")
                     .attr("class", "observation")
@@ -133,12 +146,16 @@ api(function () {
                     .duration(d => (500 + 2500*Math.random()))
                     .attr("r", 3)
 
+  // anything that we want to apply to (new as well as existing) observations
+  // should go here
   d3Obs.merge(d3ObsEnter)
-       .attr("fill", observationColor)
+      .classed("inCarousel", setInCarouselClass)
 
   sync.setHighlightInterval(function() {
-
-
+    // add station & satelite sprites here
+    d3.selectAll(".observation")
+      .classed("highlighted", setHighlightedClass)
+      .attr("fill", observationColor)
   })
 
 })
