@@ -16,8 +16,8 @@ var w = window,
 		d = document,
 		e = d.documentElement,
 		g = d.getElementsByTagName('body')[0],
-		x = w.innerWidth || e.clientWidth || g.clientWidth,
-		y = w.innerHeight|| e.clientHeight|| g.clientHeight;
+		x = 1024 // installation view width
+		y = 768 - 50 // installation view height - (marquee height)
 
 // Axes outer margin
 var axesMargin = 200;

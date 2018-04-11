@@ -3,9 +3,13 @@ Global
 ***************/
 body {
   font-family: 'IBM Plex Sans', monospace;
-  color: #fff;
-  width: 100vw;
-  height: 100vh; }
+  color: #fff; }
+
+.installation-view {
+  width: 1024px;
+  height: 768px;
+  overflow: hidden;
+  position: absolute; }
 
 .name-sat {
   color: #fff;
@@ -145,8 +149,8 @@ Screen 1
 
 .sphere {
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   background: radial-gradient(circle at 10% 225%, transparent 0%, transparent 40%, transparent 63%, #FFFFFF 65%, transparent 50%); }
 
 /***************
