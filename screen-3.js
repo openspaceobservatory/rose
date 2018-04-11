@@ -63,7 +63,7 @@ function renderImage () {
     if (observation.waterfall) {
       return observation.waterfall
     } else {
-      return renderImage()
+      return 'assets/dist/img/transparent.png'
     }
   }
 }
