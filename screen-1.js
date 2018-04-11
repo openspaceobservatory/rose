@@ -1,4 +1,5 @@
 var api = require('./lib/api')
+var countdown = require('./lib/countdown')
 var updateBgColor = require('./lib/background-color')
 var carousel = require('./lib/carousel')
 var sync = require('./lib/sync')
@@ -150,7 +151,11 @@ theFutureStartsHereStation = {
   description:""
 }
 
+var el_countdown = document.getElementById('countdown')
 
+countdown(function (time) {
+  el_countdown.innerText = `Time until new satellite data: ${time}`
+})
 
 api(function () {
   // update background color

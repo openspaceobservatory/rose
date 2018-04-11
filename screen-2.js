@@ -1,4 +1,5 @@
 var api = require('./lib/api')
+var countdown = require('./lib/countdown')
 var updateBgColor = require('./lib/background-color')
 
 window.state = {
@@ -18,6 +19,12 @@ var w = window,
 		g = d.getElementsByTagName('body')[0],
 		x = 1024 // installation view width
 		y = 768 - 50 // installation view height - (marquee height)
+
+var el_countdown = d.getElementById('countdown')
+
+countdown(function (time) {
+  el_countdown.innerText = `Time until new satellite data: ${time}`
+})
 
 // Axes outer margin
 var axesMargin = 200;
