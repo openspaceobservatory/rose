@@ -44,7 +44,6 @@ countdown(function (time) {
 })
 
 function renderImage () {
-
   var {observation, station, satellite} = carousel.highlighted()
 
   el_img.src = source()
