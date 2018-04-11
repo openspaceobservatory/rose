@@ -56,6 +56,8 @@ app.on('ready', function () {
         {role: 'paste'},
         {role: 'selectall'},
         {role: 'toggledevtools'},
+        {role: 'zoomin'},
+        {role: 'zoomout'},
         {type: 'separator'},
         {role: 'quit'}
       ]
