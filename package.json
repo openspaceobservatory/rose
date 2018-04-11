@@ -11,11 +11,12 @@
   "devDependencies": {
     "browserify": "^16.1.1",
     "electron": "1.8.4",
+    "envify": "^4.1.0",
     "node-sass": "^4.8.3"
   },
   "scripts": {
     "build": "rm -rf dist && npm run build-js && npm run build-copy",
-    "build-js": "browserify screen-1.js -o dist/screen-1.js && browserify screen-2.js -o dist/screen-2.js && browserify screen-3.js -o dist/screen-3.js",
+    "build-js": "browserify screen-1.js -t envify -o dist/screen-1.js && browserify screen-2.js -t envify -o dist/screen-2.js && browserify screen-3.js -t envify -o dist/screen-3.js",
     "build-copy": "cp screen-1.html dist/screen-1.html && cp screen-2.html dist/screen-2.html && cp screen-3.html dist/screen-3.html && cp -R assets dist/assets",
     "start": "source .env && electron app.js",
     "sass-watch": "node-sass --watch assets/scss -o assets/dist/css"
