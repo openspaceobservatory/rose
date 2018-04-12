@@ -23,11 +23,11 @@ function randomSatSprite() {
 // preset positions for satellites
 var satPositions = {
   available: [
-    {left: "750px", top: "400px"},
-    {left: "250px", top: "100px"},
-    {left: "475px", top: "200px"},
-    {left: "50px", top: "300px"},
-    {left: "300px", top: "350px"}
+    {x: 750, y: 400},
+    {x: 250, y: 100},
+    {x: 475, y: 200},
+    {x: 50,  y: 300},
+    {x: 300, y: 350}
   ]
 }
 
@@ -36,7 +36,7 @@ var satPositions = {
 function setSatPosition(sat) {
   pos = satPositions.available.pop()
   satPositions[sat.norad_cat_id] = pos
-  return ("position: absolute; left: " + pos.left + "; top: " + pos.top + ";")
+  return ("position: absolute; left: " + pos.x + "px; top: " + pos.y + "px;")
 }
 
 // function to add a satellite's position back to the list of available
@@ -49,7 +49,7 @@ function freeSatPosition(sat) {
 }
 
 function drawSatellites(sats) {
-  var boxSat = d3.select(".box-sats")
+  var boxSat = d3.select("#content")
                  .selectAll(".box-sat")
                  .data(sats, function(d) {return d.norad_cat_id})
 
@@ -78,12 +78,12 @@ function drawSatellites(sats) {
 // preset positions for ground stations
 var stationPositions = {
   available: [
-    {left: "400px", top: "50px"},
-    {left: "0px", top: "150px"},
-    {left: "550px", top: "150px"},
-    {left: "270px", top: "150px"},
-    {left: "750px", top: "180px"},
-    {left: "150px", top: "30px"}
+    {x: 400, y: 510},
+    {x: 0,   y: 610},
+    {x: 550, y: 610},
+    {x: 270, y: 610},
+    {x: 750, y: 640},
+    {x: 150, y: 490}
   ]
 }
 
@@ -92,7 +92,7 @@ var stationPositions = {
 function setStationPosition(station) {
   pos = stationPositions.available.pop()
   stationPositions[station.id] = pos
-  return ("position: absolute; left: " + pos.left + "; top: " + pos.top + ";")
+  return ("position: absolute; left: " + pos.x + "px; top: " + pos.y + "px;")
 }
 
 // function to add a station's position back to the list of
@@ -106,7 +106,7 @@ function freeStationPosition(station) {
 
 function drawStations(stations) {
 
-  var boxStation = d3.select(".box-stations")
+  var boxStation = d3.select("#content")
                      .selectAll(".box-station")
                      .data(stations)
 
@@ -131,6 +131,66 @@ function drawStations(stations) {
              .html(d => d.lat.toFixed(2) + ', ' + d.lng.toFixed(2))
 
 }
+
+function getSatCenterPos(observation) {
+  var cornerPos = satPositions[observation.norad_cat_id]
+
+  var satBoundingRect = d3.select("#sat-" + observation.norad_cat_id)
+                          .node()
+                          .getBoundingClientRect()
+
+  return {
+    x: cornerPos.x + (satBoundingRect.width/2),
+    y: cornerPos.y + 80
+  }
+}
+
+function getStationCenterPos(observation) {
+  var cornerPos = stationPositions[observation.ground_station]
+
+  var stationBoundingRect = d3.select("#station-" + observation.ground_station)
+                          .node()
+                          .getBoundingClientRect()
+
+  return {
+    x: cornerPos.x + (stationBoundingRect.width/2),
+    y: cornerPos.y + 60
+  }
+}
+
+function drawTransmissionLines(observations) {
+
+  var transmLine = d3.select("#svg-content")
+                     .selectAll(".transmission-line")
+                     .data(observations)
+
+  transmLine.exit()
+            .remove()
+
+  transmLineEnter = transmLine.enter()
+                              .append("line")
+                              .attr("class", "transmission-line")
+                              .attr("id", d => "obs-" + d.id)
+                              .attr("stroke", "black")
+                              .attr("stroke-cap", "round")
+                              .attr("stroke-width", "2")
+                              .attr("stroke-dasharray", "7,7")
+                              .attr("x1", d => getStationCenterPos(d).x)
+                              .attr("y1", d => getStationCenterPos(d).y)
+                              .attr("x2", d => getSatCenterPos(d).x)
+                              .attr("y2", d => getSatCenterPos(d).y)
+}
+
+function animateTransmissionLines() {
+  d3.selectAll(".transmission-line")
+    .attr("stroke-dashoffset", 0)
+    .transition()
+    .ease(d3.easeLinear)
+    .duration(2000)
+    .attr("stroke-dashoffset", 14)
+    .on("end", animateTransmissionLines)
+}
+
 
 // dummy station for ground station
 // above exhibition:
@@ -162,6 +222,7 @@ api(function () {
   var d = new Date()
   updateBgColor(d, window.state.weather.sunrise, window.state.weather.sunset)
 
+  var carouselObservations = carousel.observations()
   var carouselSats = carousel.satellites()
   var carouselStations = carousel.stations()
   carouselStations.splice(0,0,theFutureStartsHereStation)
@@ -169,15 +230,24 @@ api(function () {
   // update d3!
   drawStations(carouselStations)
   drawSatellites(carouselSats)
+  drawTransmissionLines(carouselObservations)
+
+  animateTransmissionLines()
 
   sync.setHighlightInterval(function() {
-    var {station, satellite} = carousel.highlighted()
+    var {station, satellite, observation} = carousel.highlighted()
+
 
     d3.selectAll(".box-sat").classed("highlighted", false)
     d3.selectAll(".box-station").classed("highlighted", false)
 
     d3.select("#sat-" + satellite.norad_cat_id).classed("highlighted", true)
     d3.select("#station-" + station.id).classed("highlighted", true)
+
+    d3.selectAll(".transmission-line").attr("stroke", "black")
+                                      .attr("opacity", "0.2")
+    d3.select("#obs-" + observation.id).attr("stroke", "#0C3")
+                                      .attr("opacity", "1")
   })
 
 })

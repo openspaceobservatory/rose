@@ -105,12 +105,19 @@ Screen 1
 #screen-1.sunset {
   background: linear-gradient(to right, #D36A6A, #263836 300%); }
 
-#screen-1 .box-stations {
+#screen-1 #content {
   position: absolute;
-  bottom: 0;
+  top: 0;
   left: 0;
-  width: 40%;
-  height: 40%; }
+  width: 100%;
+  height: 100%; }
+
+#screen-1 #svg-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; }
 
 #screen-1 .box-station {
   width: 250px;
@@ -120,9 +127,6 @@ Screen 1
     margin: 0 auto;
     margin-bottom: -20px; }
 
-#screen-1 .box-station.highlighted {
-  border: 3px dashed #0C3; }
-
 #screen-1 .box-sat {
   width: 250px;
   position: absolute;
@@ -131,9 +135,6 @@ Screen 1
     display: block;
     margin: 0 auto;
     margin-top: -10px; }
-
-#screen-1 .box-sat.highlighted {
-  border: 3px dashed #0C3; }
 
 #screen-1 #test-station {
   margin-left: 150px;
