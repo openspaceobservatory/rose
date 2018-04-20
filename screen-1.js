@@ -108,7 +108,7 @@ function drawStations(stations) {
 
   var boxStation = d3.select("#content")
                      .selectAll(".box-station")
-                     .data(stations)
+                     .data(stations, function(d) {return d.id})
 
   boxStation.exit()
             .attr("style", freeStationPosition)
@@ -162,15 +162,16 @@ function drawTransmissionLines(observations) {
 
   var transmLine = d3.select("#svg-content")
                      .selectAll(".transmission-line")
-                     .data(observations)
+                     .data(observations, function(d) {return d.id})
 
   transmLine.exit()
             .remove()
 
   transmLineEnter = transmLine.enter()
-                              .append("line")
+                              .append("g")
                               .attr("class", "transmission-line")
                               .attr("id", d => "obs-" + d.id)
+                              .append("line")
                               .attr("stroke", "black")
                               .attr("stroke-cap", "round")
                               .attr("stroke-width", "2")
@@ -244,10 +245,14 @@ api(function () {
     d3.select("#sat-" + satellite.norad_cat_id).classed("highlighted", true)
     d3.select("#station-" + station.id).classed("highlighted", true)
 
-    d3.selectAll(".transmission-line").attr("stroke", "black")
-                                      .attr("opacity", "0.2")
-    d3.select("#obs-" + observation.id).attr("stroke", "#0C3")
-                                      .attr("opacity", "1")
+    d3.selectAll(".transmission-line line").transition()
+                                           .duration(4000)
+                                           .attr("stroke", "black")
+                                           .attr("opacity", "0.2")
+    d3.select("#obs-" + observation.id + " line").transition()
+                                                 .duration(4000)
+                                                 .attr("stroke", "#0C3")
+                                                 .attr("opacity", "1")
   })
 
 })
