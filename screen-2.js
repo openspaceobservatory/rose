@@ -25,7 +25,8 @@ var w = window,
 var el_countdown = d.getElementById('countdown')
 
 countdown(function (time) {
-  el_countdown.innerText = `Time until new satellite data: ${time}`
+  //el_countdown.innerText = `Time until new satellite data: ${time}`
+  el_countdown.innerText = `${time}`
 })
 
 // Axes outer margin
