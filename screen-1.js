@@ -36,7 +36,7 @@ var satPositions = {
 function setSatPosition(sat) {
   pos = satPositions.available.pop()
   satPositions[sat.norad_cat_id] = pos
-  return ("position: absolute; left: " + pos.x + "px; top: " + pos.y + "px;")
+  return "translate(" + pos.x + "," + pos.y + ")"
 }
 
 // function to add a satellite's position back to the list of available
@@ -49,29 +49,60 @@ function freeSatPosition(sat) {
 }
 
 function drawSatellites(sats) {
-  var boxSat = d3.select("#content")
+  var boxSat = d3.select("#svg-content .layer-two")
                  .selectAll(".box-sat")
                  .data(sats, function(d) {return d.norad_cat_id})
+
 
   boxSat.exit()
         .attr("style", freeSatPosition)
         .remove()
 
-  boxSatEnter = boxSat.enter()
-                      .append("div")
-                      .attr("class", "box-sat")
-                      .attr("id", d => "sat-" + d.norad_cat_id)
-                      .attr("style", setSatPosition)
+  var group = boxSat.enter()
+                    .append("g")
+                    .attr("class", "box-sat")
+                    .attr("id", d => "sat-" + d.norad_cat_id)
+                    .attr("transform", setSatPosition)
 
-  boxSatEnter.append("span")
-             .attr("class", "name-sat")
-             .html(d => d.name)
-  boxSatEnter.append("br")
-  boxSatEnter.append("span")
-             .attr("class", "description-icon")
-             .html("Origin Information")
-  boxSatEnter.append("img")
-             .attr("src", randomSatSprite)
+  var text = group.append("text")
+                  .attr("text-anchor", "middle")
+
+  text.append("tspan")
+      .attr("x", 50)
+      .attr("dy", "1.2em")
+      .attr("class", "name-sat")
+      .text(d => d.name)
+
+  text.append("tspan")
+      .attr("x", 50)
+      .attr("dy", "1.2em")
+      .attr("class", "description-icon")
+      .text("Origin Information")
+
+  group.append("svg:image")
+       .attr("class", "sat-icon")
+       .attr("xlink:href", randomSatSprite)
+       .attr("y", "1.2em")
+
+  function repeat() {
+    d3.select("#svg-content .layer-two")
+      .selectAll(".sat-icon")
+      .attr('y', 22)
+      .transition()
+      .ease(d3.easeQuad)
+      .duration(4000)
+      .attr('y', 30)
+      .transition()
+      .ease(d3.easeQuad)
+      .duration(4000)
+      .attr('y', 22)
+      .on("end", repeat)
+  }
+
+  d3.select("#svg-content .layer-two")
+    .selectAll(".sat-icon")
+    .transition()
+    .on("end", repeat)
 
 }
 
@@ -79,7 +110,7 @@ function drawSatellites(sats) {
 var stationPositions = {
   available: [
     {x: 400, y: 510},
-    {x: 0,   y: 610},
+    {x: 100,   y: 610},
     {x: 550, y: 610},
     {x: 270, y: 610},
     {x: 750, y: 640},
@@ -92,7 +123,7 @@ var stationPositions = {
 function setStationPosition(station) {
   pos = stationPositions.available.pop()
   stationPositions[station.id] = pos
-  return ("position: absolute; left: " + pos.x + "px; top: " + pos.y + "px;")
+  return "translate(" + pos.x + "," + pos.y + ")"
 }
 
 // function to add a station's position back to the list of
@@ -106,7 +137,7 @@ function freeStationPosition(station) {
 
 function drawStations(stations) {
 
-  var boxStation = d3.select("#content")
+  var boxStation = d3.select("#svg-content .layer-two")
                      .selectAll(".box-station")
                      .data(stations, function(d) {return d.id})
 
@@ -114,34 +145,39 @@ function drawStations(stations) {
             .attr("style", freeStationPosition)
             .remove()
 
-  boxStationEnter = boxStation.enter()
-                              .append("div")
-                              .attr("class", "box-station")
-                              .attr("id", d => "station-" + d.id)
-                              .attr("style", setStationPosition)
+  var group = boxStation.enter()
+                        .append("g")
+                        .attr("class", "box-station")
+                        .attr("id", d => "station-" + d.id)
+                        .attr("transform", setStationPosition)
 
-  boxStationEnter.append("img")
-             .attr("src", "assets/dist/img/ground-station-active.png")
-  boxStationEnter.append("span")
-             .attr("class", "name-station")
-             .html(d => d.name)
-  boxStationEnter.append("br")
-  boxStationEnter.append("span")
-             .attr("class", "description-icon")
-             .html(d => d.lat.toFixed(2) + ', ' + d.lng.toFixed(2))
+  group.append("svg:image")
+       .attr("xlink:href", "assets/dist/img/ground-station-active.png")
+
+  var text = group.append("text")
+                  .attr("text-anchor", "middle")
+                  .attr("y", "4em")
+
+  text.append("tspan")
+      .attr("x", 50)
+      .attr("dy", "1.2em")
+      .attr("class", "name-station")
+      .text(d => d.name)
+
+  text.append("tspan")
+      .attr("x", 50)
+      .attr("dy", "1.2em")
+      .attr("class", "description-icon")
+      .text(d => d.lat.toFixed(2) + ', ' + d.lng.toFixed(2))
 
 }
 
 function getSatCenterPos(observation) {
   var cornerPos = satPositions[observation.norad_cat_id]
 
-  var satBoundingRect = d3.select("#sat-" + observation.norad_cat_id)
-                          .node()
-                          .getBoundingClientRect()
-
   return {
-    x: cornerPos.x + (satBoundingRect.width/2),
-    y: cornerPos.y + 80
+    x: cornerPos.x + 50,
+    y: cornerPos.y + 75
   }
 }
 
@@ -153,14 +189,14 @@ function getStationCenterPos(observation) {
                           .getBoundingClientRect()
 
   return {
-    x: cornerPos.x + (stationBoundingRect.width/2),
-    y: cornerPos.y + 60
+    x: cornerPos.x + 50,
+    y: cornerPos.y + 50
   }
 }
 
 function drawTransmissionLines(observations) {
 
-  var transmLine = d3.select("#svg-content")
+  var transmLine = d3.select("#svg-content .layer-one")
                      .selectAll(".transmission-line")
                      .data(observations, function(d) {return d.id})
 
@@ -180,6 +216,7 @@ function drawTransmissionLines(observations) {
                               .attr("y1", d => getStationCenterPos(d).y)
                               .attr("x2", d => getSatCenterPos(d).x)
                               .attr("y2", d => getSatCenterPos(d).y)
+
 }
 
 function animateTransmissionLines() {
