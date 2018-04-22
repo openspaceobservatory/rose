@@ -193,11 +193,17 @@ Screen 1
   }
   #box-constellations {
     position: absolute;
-    top: 50px;
-    right: 25px;
-    width: 400px;
-    height: 300px;
+    top: 15px;
+    right: 15px;
+    width: 300px;
+    height: 200px;
     border: 1px solid #fff;
+    img {
+      display: block;
+      height: 170px;
+      margin: 0 auto;
+      margin-top: 15px;
+    }
   }
 }
 

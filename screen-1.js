@@ -252,7 +252,7 @@ theFutureStartsHereStation = {
 var el_countdown = document.getElementById('countdown')
 
 countdown(function (time) {
-  el_countdown.innerText = `Time until new satellite data: ${time}`
+  el_countdown.innerText = `${time}`
 })
 
 api(function () {
