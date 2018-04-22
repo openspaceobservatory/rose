@@ -10,8 +10,13 @@ $color-sunset-dark: #2B2020;
 Global
 ***************/
 body   {
-  font-family: 'IBM Plex Sans', monospace;
+  font-family: 'IBM Plex Sans', sans-serif;
   color: #fff;
+  font-weight: 300;
+}
+
+strong {
+  font-weight: 500;
 }
 
 .installation-view {
@@ -58,6 +63,12 @@ body   {
   font-size: 22px;
   font-family: 'IBM Plex Sans', sans-serif;
   line-height: 26px;
+}
+
+.observation-title {
+  font-size: 28px;
+  padding: 25px 0;
+  font-weight: 300;
 }
 
 /* Marquee */
@@ -121,7 +132,6 @@ body   {
     transform: translateX(100%);
   }
 }
-
 
 /***************
 Screen 1
@@ -234,14 +244,39 @@ Screen 3
 #screen-3.sunrise {
   background: linear-gradient(to right, $color-sunrise-dark -200%, $color-sunrise 100%);
 }
-#screen-3.midday {
+#screen-3.midday {  
   background: linear-gradient(to right, $color-midday, $color-midday-dark 200%);
 }
 #screen-3.sunset {
   background: linear-gradient(to right, $color-sunset -200%, $color-sunrise-dark 100%);
 }
 
+#screen-3 {
+  #content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  .observation-title {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 #satellite-image {
-	max-height: 80vh;
+  display: block;
+  margin: 0 auto;
+  margin-top: 20vh;
+	max-height: 60vh;
 	max-width: 80vw;
 }
+
+.countdown-container {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+}
+
+

@@ -40,7 +40,7 @@ api(function () {
 })
 
 countdown(function (time) {
-  el_countdown.innerText = `Time until new satellite data: ${time}`
+  el_countdown.innerText = `${time}`
 })
 
 function renderImage () {
@@ -48,11 +48,11 @@ function renderImage () {
 
   el_img.src = source()
 
-  el_info_satellite.innerText = `Satellite: ${satellite.name}`
-  el_info_station.innerText = `Observed by: ${station.name}`
+  el_info_satellite.innerHTML = `<strong>${satellite.name} Satellite</strong> data<br>`
+  el_info_station.innerHTML = `as observed by <strong>${station.name} Station</strong>`
 
   function source () {
-    if (observation.demoddata.length > 0) {
+    if (observation.demoddata.length > 0) { 
       var entry = observation.demoddata[0].payload_demod
       var ext = fileExtension(entry)
 
