@@ -39,6 +39,15 @@ function setSatPosition(sat) {
   return "translate(" + pos.x + "," + pos.y + ")"
 }
 
+function wiggleSatPosition(d) {
+  pos = satPositions[d.norad_cat_id]
+
+  result = { "start": ("translate(" + pos.x + "," + pos.y + ")"),
+             "end": ("translate(" + pos.x + "," + (pos.y + 8) + ")") }
+
+  return result
+}
+
 // function to add a satellite's position back to the list of available
 // positions
 function freeSatPosition(sat) {
@@ -84,25 +93,26 @@ function drawSatellites(sats) {
        .attr("xlink:href", randomSatSprite)
        .attr("y", "1.2em")
 
-  function repeat() {
-    d3.select("#svg-content .layer-two")
-      .selectAll(".sat-icon")
-      .attr('y', 22)
-      .transition()
-      .ease(d3.easeQuad)
-      .duration(4000)
-      .attr('y', 30)
-      .transition()
-      .ease(d3.easeQuad)
-      .duration(4000)
-      .attr('y', 22)
-      .on("end", repeat)
-  }
+  // initialize satellite wiggling
+  group.transition()
+       .ease(d3.easeQuad)
+       .duration(d => 4000*Math.random() + 2000)
+       .attr('transform', function (d) { return wiggleSatPosition(d).end })
+       .on("end", repeatSatWiggle)
 
-  d3.select("#svg-content .layer-two")
-    .selectAll(".sat-icon")
-    .transition()
-    .on("end", repeat)
+
+  function repeatSatWiggle(d) {
+    d3.select("#sat-"+d.norad_cat_id)
+      .transition()
+      .ease(d3.easeQuad)
+      .duration(3000)
+      .attr('transform', function (d) { return wiggleSatPosition(d).start })
+      .transition()
+      .ease(d3.easeQuad)
+      .duration(3000)
+      .attr('transform', function (d) { return wiggleSatPosition(d).end })
+      .on("end", repeatSatWiggle)
+  }
 
 }
 
