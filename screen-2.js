@@ -78,27 +78,6 @@ function initializeD3() {
               .attr("fill", "#fff")
               .attr("cx", axesMargin)
               .attr("cy", d => yScale(d.norad_cat_id))
-
-  // Text label for the X axis
-  svgContainer.append("text")
-    .attr("transform",
-          "translate(" + (x/2) + " ," +
-                         (y - axesMargin/3) + ")")
-    .style("text-anchor", "middle")
-    .attr("fill", "#fff")
-    .attr('class','description-axis')
-    .text("Ground Stations")
-
-  // Text label for the Y axis
-  svgContainer.append("text")
-    .attr("transform", "translate(0,0)")
-    .attr("transform", "rotate(-90)")
-    .attr("y", axesMargin/3)
-    .attr("x", 0 - y/2)
-    .style("text-anchor", "middle")
-    .attr("fill", "#fff")
-    .attr('class','description-axis')
-    .text("Satellites");
 }
 
 function observationColor(observation) {
@@ -160,4 +139,3 @@ api(function () {
   })
 
 })
-

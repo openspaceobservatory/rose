@@ -43,14 +43,6 @@ strong {
   line-height: 28px;
 }
 
-.description-axis {
-  color: #fff;
-  fill: #fff;
-  font-size: 24px;
-  font-family: 'IBM Plex Sans', monospace;
-  line-height: 32px;
-}
-
 .description-icon {
   color: #fff;
   fill: #fff;
@@ -66,9 +58,11 @@ strong {
 }
 
 .observation-title {
-  font-size: 28px;
+  font-size: 30px;
   padding: 25px 0;
-  font-weight: 300;
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.05rem;
 }
 
 /* Marquee */
@@ -250,7 +244,7 @@ Screen 3
 #screen-3.sunrise {
   background: linear-gradient(to right, $color-sunrise-dark -200%, $color-sunrise 100%);
 }
-#screen-3.midday {  
+#screen-3.midday {
   background: linear-gradient(to right, $color-midday, $color-midday-dark 200%);
 }
 #screen-3.sunset {
@@ -279,10 +273,30 @@ Screen 3
 	max-width: 80vw;
 }
 
-.countdown-container {
-  position: absolute;
-  bottom: 15px;
-  right: 15px;
+.axis-labels {
+  color: #fff;
+  font-family: 'IBM Plex Sans';
+  font-size: 22px;
+  font-weight: 100;
+  text-transform: uppercase;
 }
 
+.countdown-container {
+  position: absolute;
+  bottom: 16px;
+  right: 14px;
+}
 
+.x-description {
+  position: absolute;
+  bottom: 16px;
+  width: 100%;
+  text-align: center;
+}
+
+.y-description {
+  position: fixed;
+  transform: rotate(-90deg);
+  top: 372px;
+  left: -31px;
+}

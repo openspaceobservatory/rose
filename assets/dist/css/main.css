@@ -30,13 +30,6 @@ strong {
   font-weight: 500;
   line-height: 28px; }
 
-.description-axis {
-  color: #fff;
-  fill: #fff;
-  font-size: 24px;
-  font-family: 'IBM Plex Sans', monospace;
-  line-height: 32px; }
-
 .description-icon {
   color: #fff;
   fill: #fff;
@@ -50,9 +43,11 @@ strong {
   line-height: 26px; }
 
 .observation-title {
-  font-size: 28px;
+  font-size: 30px;
   padding: 25px 0;
-  font-weight: 300; }
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.05rem; }
 
 /* Marquee */
 .marquee {
@@ -226,7 +221,26 @@ Screen 3
   max-height: 60vh;
   max-width: 80vw; }
 
+.axis-labels {
+  color: #fff;
+  font-family: 'IBM Plex Sans';
+  font-size: 22px;
+  font-weight: 100;
+  text-transform: uppercase; }
+
 .countdown-container {
   position: absolute;
-  bottom: 15px;
-  right: 15px; }
+  bottom: 16px;
+  right: 14px; }
+
+.x-description {
+  position: absolute;
+  bottom: 16px;
+  width: 100%;
+  text-align: center; }
+
+.y-description {
+  position: fixed;
+  transform: rotate(-90deg);
+  top: 372px;
+  left: -31px; }
