@@ -103,7 +103,6 @@ api(function () {
   console.log('drawing a new zone')
 
   // "d3 app"
-  //
   var observations = window.state.observations.slice().reverse()
 
   // what to do for observations that are already present in the svg
@@ -132,10 +131,21 @@ api(function () {
       .classed("inCarousel", setInCarouselClass)
 
   sync.setHighlightInterval(function() {
+    var {station, satellite} = carousel.highlighted()
+
     // add station & satelite sprites here
     d3.selectAll(".observation")
       .classed("highlighted", setHighlightedClass)
       .attr("fill", observationColor)
+
+    var x = xScale(carousel.highlighted().station.name)
+    var y = yScale(carousel.highlighted().satellite.norad_cat_id)
+
+    d.getElementById('station').style = `left: ${Math.round(0.99 * x) - 44}px;`
+    d.getElementById('sat').style = `top: ${Math.round(0.99 * y) - 48}px;`
+
+    d.getElementById('station-name').innerText = station.name
+    d.getElementById('sat-name').innerText = satellite.name
   })
 
 })
