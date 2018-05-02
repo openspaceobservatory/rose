@@ -19,8 +19,8 @@ var w = window,
     d = document,
     e = d.documentElement,
     g = d.getElementsByTagName('body')[0],
-    x = d.getElementById('content').clientWidth
-    y = d.getElementById('content').clientHeight
+    contentWidth = d.getElementById('content').clientWidth
+    contentHeight = d.getElementById('content').clientHeight
 
 var el_countdown = d.getElementById('countdown')
 
@@ -39,13 +39,13 @@ var xScale, yScale
 function initXScale (cats) {
   return d3.scaleBand()
            .domain(cats)
-           .range([axesMargin + 18, x-axesMargin - 18])
+           .range([axesMargin + 18, contentWidth - axesMargin - 18])
 }
 
 function initYScale (cats) {
   return d3.scaleBand()
            .domain(cats)
-           .range([axesMargin, y-axesMargin])
+           .range([axesMargin, contentHeight - axesMargin])
 }
 
 function initializeD3() {
@@ -59,34 +59,34 @@ function initializeD3() {
   yScale = initYScale(satelliteCatIds)
 
   // Axes
-  svgContainer.selectAll(".station")
-              .data(window.state.stations)
-              .enter()
-              .append("circle")
-              .attr("class", "station")
-              .attr("r", 3)
-              .attr("fill", "#fff")
-              .attr("cx", d => xScale(d.name))
-              .attr("cy", y-axesMargin - 4)
+  //svgContainer.selectAll(".station")
+  //            .data(window.state.stations)
+  //            .enter()
+  //            .append("circle")
+  //            .attr("class", "station")
+  //            .attr("r", 3)
+  //            .attr("fill", "#fff")
+  //            .attr("cx", d => xScale(d.name))
+  //            .attr("cy", y-axesMargin - 4)
 
-  svgContainer.selectAll(".satellite")
-              .data(window.state.satellites)
-              .enter()
-              .append("circle")
-              .attr("class", "satellite")
-              .attr("r", 1)
-              .attr("fill", "#fff")
-              .attr("cx", axesMargin)
-              .attr("cy", d => yScale(d.norad_cat_id))
+  //svgContainer.selectAll(".satellite")
+  //            .data(window.state.satellites)
+  //            .enter()
+  //            .append("circle")
+  //            .attr("class", "satellite")
+  //            .attr("r", 1)
+  //            .attr("fill", "#fff")
+  //            .attr("cx", axesMargin)
+  //            .attr("cy", d => yScale(d.norad_cat_id))
 }
 
-function observationColor(observation) {
+function observationRadius(observation) {
   if (carousel.highlighted().observation == observation) {
-    return "#F00"
+    return "8px"
   } else if (carousel.observations().includes(observation)) {
-    return "#00F"
+    return "5px"
   } else {
-    return "white"
+    return "3px"
   }
 }
 
@@ -100,7 +100,6 @@ function setInCarouselClass(observation) {
 
 api(function () {
   if (!d3Initialized) initializeD3()
-  console.log('drawing a new zone')
 
   // "d3 app"
   var observations = window.state.observations.slice().reverse()
@@ -118,6 +117,7 @@ api(function () {
                     .attr("class", "observation")
                     .attr("cx", d => xScale(d.station_name))
                     .attr("cy", d => yScale(d.norad_cat_id))
+                    .attr("fill", "#FFF")
                     .attr("r", 0)
                     .transition()
                     .ease(d3.easeElastic)
@@ -136,10 +136,59 @@ api(function () {
     // add station & satelite sprites here
     d3.selectAll(".observation")
       .classed("highlighted", setHighlightedClass)
-      .attr("fill", observationColor)
+      .attr("r", observationRadius)
 
     var x = xScale(carousel.highlighted().station.name)
     var y = yScale(carousel.highlighted().satellite.norad_cat_id)
+
+    var outlineRadius = 30
+
+    // remove previous styling
+    svgContainer.selectAll("line").remove()
+    svgContainer.selectAll(".highlighted-outline").remove()
+    svgContainer.selectAll(".highlighted-pulse").remove()
+
+    // add vertical axis
+    svgContainer.append("line")
+                .attr("stroke", "#FFF")
+                .attr("stroke-width", 2)
+                .attr("stroke-opacity", 0.7)
+                .attr("x1", x)
+                .attr("y1", y + outlineRadius + 5)
+                .attr("x2", x)
+                .attr("y2", contentHeight - 155)
+
+    // add horizontal axis
+    svgContainer.append("line")
+                .attr("stroke", "#FFF")
+                .attr("stroke-opacity", 0.7)
+                .attr("stroke-width", 2)
+                .attr("x1", x - outlineRadius - 5)
+                .attr("y1", y)
+                .attr("x2", 150)
+                .attr("y2", y)
+
+    // add highlighted outline
+    svgContainer.append("circle")
+                .attr("class", "highlighted-outline")
+                .attr("stroke", "#FFF")
+                .attr("stroke-width", 2)
+                .attr("fill", "none")
+                .attr("r", outlineRadius)
+                .attr("cx", x)
+                .attr("cy", y)
+
+    // add highlighted pulse
+    svgContainer.append("circle")
+                .attr("class", "highlighted-pulse")
+                .attr("stroke", "#FFF")
+                .attr("stroke-width", 2)
+                .attr("fill", "#FFF")
+                .attr('style', "transform-origin: " + x + "px " + y + "px;")
+                .attr("r", 8)
+                .attr("cx", x)
+                .attr("cy", y)
+
 
     d.getElementById('station').style = `left: ${Math.round(0.99 * x) - 44}px;`
     d.getElementById('sat').style = `top: ${Math.round(0.99 * y) - 48}px;`

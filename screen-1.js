@@ -285,6 +285,7 @@ api(function () {
   sync.setHighlightInterval(function() {
     var {station, satellite, observation} = carousel.highlighted()
 
+    d3.select()
 
     d3.selectAll(".box-sat").classed("highlighted", false)
     d3.selectAll(".box-station").classed("highlighted", false)
