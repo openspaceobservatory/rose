@@ -48,8 +48,8 @@ var battleshipHeight = 450
 var xOffset = 50
 var yOffset = -40
 
-// time rangers
-var maxTimeRange = 3*60*60*1000
+// time rang for tiny dots
+var maxTimeRange = 3*60*60*1000 // in milliseconds
 var smallObsScale = d3.scaleLinear()
                       .domain([0,maxTimeRange])
                       .range([smallObsSize,0])
