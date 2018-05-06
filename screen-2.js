@@ -23,6 +23,39 @@ var w = window,
     contentWidth = d.getElementById('content').clientWidth
     contentHeight = d.getElementById('content').clientHeight
 
+
+
+// =============================================================================
+// Graphics Variables
+// =============================================================================
+
+// dot sizes
+var largeObsSize = 23
+var medObsSize = 10
+var smallObsSize = 5
+
+// outline variables
+var outlineRadius = 35
+var outlineAxisOffset = 10
+var outlineColor = "#0C3"
+var outlineThickness = 2
+var outlineOpacity = 1
+
+// battleship dimensions
+var battleshipWidth = 700
+var battleshipHeight = 450
+
+var xOffset = 50
+var yOffset = -40
+
+// time rangers
+var maxTimeRange = 3*60*60*1000
+var smallObsScale = d3.scaleLinear()
+                      .domain([0,maxTimeRange])
+                      .range([smallObsSize,0])
+
+// =============================================================================
+
 var el_countdown = d.getElementById('countdown')
 
 countdown(function (time) {
@@ -38,15 +71,21 @@ var d3Initialized = false
 var xScale, yScale
 
 function initXScale (cats) {
+  xMin = (contentWidth - battleshipWidth)/2 + xOffset
+  xMax = (contentWidth + battleshipWidth)/2 + xOffset
+
+  yMin = (contentHeight - battleshipHeight)/2 + yOffset
+  yMax = (contentHeight + battleshipHeight)/2 + yOffset
+
   return d3.scaleBand()
            .domain(cats)
-           .range([axesMargin + 18, contentWidth - axesMargin - 18])
+           .range([xMin, xMax])
 }
 
 function initYScale (cats) {
   return d3.scaleBand()
            .domain(cats)
-           .range([axesMargin, contentHeight - axesMargin])
+           .range([yMin, yMax])
 }
 
 function initializeD3() {
@@ -59,35 +98,20 @@ function initializeD3() {
   var satelliteCatIds = window.state.satellites.map(x => x["norad_cat_id"])
   yScale = initYScale(satelliteCatIds)
 
-  // Axes
-  //svgContainer.selectAll(".station")
-  //            .data(window.state.stations)
-  //            .enter()
-  //            .append("circle")
-  //            .attr("class", "station")
-  //            .attr("r", 3)
-  //            .attr("fill", "#fff")
-  //            .attr("cx", d => xScale(d.name))
-  //            .attr("cy", y-axesMargin - 4)
-
-  //svgContainer.selectAll(".satellite")
-  //            .data(window.state.satellites)
-  //            .enter()
-  //            .append("circle")
-  //            .attr("class", "satellite")
-  //            .attr("r", 1)
-  //            .attr("fill", "#fff")
-  //            .attr("cx", axesMargin)
-  //            .attr("cy", d => yScale(d.norad_cat_id))
 }
 
 function observationRadius(observation) {
   if (carousel.highlighted().observation == observation) {
-    return "8px"
+    return largeObsSize + "px"
   } else if (carousel.observations().includes(observation)) {
-    return "5px"
+    return medObsSize + "px"
   } else {
-    return "3px"
+    var start = Date.parse(observation.start)
+    var now = Date.now()
+
+    var size = Math.max(0,smallObsScale(now - start))
+
+    return size + "px"
   }
 }
 
@@ -122,9 +146,9 @@ api(function () {
                     .attr("r", 0)
                     .transition()
                     .ease(d3.easeElastic)
-                    .delay(d => 1000*Math.random())
+                    .delay(d => 5000*Math.random())
                     .duration(d => (500 + 2500*Math.random()))
-                    .attr("r", 3)
+                    .attr("r", observationRadius)
 
   // anything that we want to apply to (new as well as existing) observations
   // should go here
@@ -137,12 +161,22 @@ api(function () {
     // add station & satelite sprites here
     d3.selectAll(".observation")
       .classed("highlighted", setHighlightedClass)
+
+    d3.selectAll(".observation:not(.highlighted)")
+      .transition()
+      .ease(d3.easeBounce)
+      .duration(d => (1500 + 2500*Math.random()))
+      .attr("r", observationRadius)
+
+    d3.selectAll(".observation.highlighted")
+      .transition()
+      .ease(d3.easeElastic)
+      .duration(d => (1500 + 2500*Math.random()))
       .attr("r", observationRadius)
 
     var x = xScale(carousel.highlighted().station.name)
     var y = yScale(carousel.highlighted().satellite.norad_cat_id)
 
-    var outlineRadius = 30
 
     // remove previous styling
     svgContainer.selectAll("line").remove()
@@ -151,20 +185,18 @@ api(function () {
 
     // add vertical axis
     svgContainer.append("line")
-                .attr("stroke", "#FFF")
-                .attr("stroke-width", 2)
-                .attr("stroke-opacity", 0.7)
+                .attr("stroke", outlineColor)
+                .attr("stroke-width", outlineThickness)
                 .attr("x1", x)
-                .attr("y1", y + outlineRadius + 5)
+                .attr("y1", y + outlineRadius + outlineAxisOffset)
                 .attr("x2", x)
                 .attr("y2", contentHeight - 155)
 
     // add horizontal axis
     svgContainer.append("line")
-                .attr("stroke", "#FFF")
-                .attr("stroke-opacity", 0.7)
-                .attr("stroke-width", 2)
-                .attr("x1", x - outlineRadius - 5)
+                .attr("stroke", outlineColor)
+                .attr("stroke-width", outlineThickness)
+                .attr("x1", x - outlineRadius - outlineAxisOffset)
                 .attr("y1", y)
                 .attr("x2", 150)
                 .attr("y2", y)
@@ -172,8 +204,8 @@ api(function () {
     // add highlighted outline
     svgContainer.append("circle")
                 .attr("class", "highlighted-outline")
-                .attr("stroke", "#FFF")
-                .attr("stroke-width", 2)
+                .attr("stroke", outlineColor)
+                .attr("stroke-width", outlineThickness)
                 .attr("fill", "none")
                 .attr("r", outlineRadius)
                 .attr("cx", x)
@@ -186,7 +218,7 @@ api(function () {
                 .attr("stroke-width", 2)
                 .attr("fill", "#FFF")
                 .attr('style', "transform-origin: " + x + "px " + y + "px;")
-                .attr("r", 8)
+                .attr("r", largeObsSize)
                 .attr("cx", x)
                 .attr("cy", y)
 
