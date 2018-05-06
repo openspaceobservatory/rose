@@ -255,7 +255,6 @@ api(function () {
   var carouselStations = carousel.stations()
 
   var prependFuture = carouselStations.filter(station => station.id === 86)
-  console.log(prependFuture)
   if (prependFuture.length === 0) {
     carouselStations.unshift(window.state.stationsById['86'])
   }
