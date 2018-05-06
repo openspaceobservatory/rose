@@ -120,7 +120,7 @@ function drawSatellites(sats) {
 var stationPositions = {
   available: [
     {x: 425, y: 530},
-    {x: -300,   y: 630},
+    {x: 100,   y: 630},
     {x: 570, y: 630},
     {x: 270, y: 590},
     {x: 730, y: 600},
@@ -239,26 +239,6 @@ function animateTransmissionLines() {
     .on("end", animateTransmissionLines)
 }
 
-
-// dummy station for ground station
-// above exhibition:
-theFutureStartsHereStation = {
-  id: 16,
-  name: "The Future Starts Here",
-  altitude: 5,
-  min_horizon: 30,
-  lat: 41.5,
-  lng: 52.7,
-  qthlocator: "PF95ig",
-  location:"London, UK",
-  antenna: ["UHF Turnstile"],
-  created:"2017-07-15T12:59:11Z",
-  last_seen: "2018-04-10T17:14:54Z",
-  status: "Online",
-  observations:7070,
-  description:""
-}
-
 var el_countdown = document.getElementById('countdown')
 
 countdown(function (time) {
@@ -273,7 +253,12 @@ api(function () {
   var carouselObservations = carousel.observations()
   var carouselSats = carousel.satellites()
   var carouselStations = carousel.stations()
-  carouselStations.splice(0,0,theFutureStartsHereStation)
+
+  var prependFuture = carouselStations.filter(station => station.id === 86)
+  console.log(prependFuture)
+  if (prependFuture.length === 0) {
+    carouselStations.unshift(window.state.stationsById['86'])
+  }
 
   // update d3!
   drawStations(carouselStations)
