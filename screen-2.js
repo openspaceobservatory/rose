@@ -30,8 +30,8 @@ var w = window,
 // =============================================================================
 
 // dot sizes
-var largeObsSize = 23
-var medObsSize = 10
+var largeObsSize = 20
+var medObsSize = 8
 var smallObsSize = 5
 
 // outline variables
@@ -165,13 +165,13 @@ api(function () {
     d3.selectAll(".observation:not(.highlighted)")
       .transition()
       .ease(d3.easeBounce)
-      .duration(d => (1500 + 2500*Math.random()))
+      .duration(2000)
       .attr("r", observationRadius)
 
     d3.selectAll(".observation.highlighted")
       .transition()
       .ease(d3.easeElastic)
-      .duration(d => (1500 + 2500*Math.random()))
+      .duration(2000)
       .attr("r", observationRadius)
 
     var x = xScale(carousel.highlighted().station.name)
