@@ -3,6 +3,7 @@ var countdown = require('./lib/countdown')
 var updateBgColor = require('./lib/background-color')
 var carousel = require('./lib/carousel')
 var sync = require('./lib/sync')
+var concat = require('./lib/concat')
 
 window.state = {
   observations: [],
@@ -193,16 +194,7 @@ api(function () {
     d.getElementById('station').style = `left: ${Math.round(0.99 * x) - 69}px;`
     d.getElementById('sat').style = `top: ${Math.round(0.99 * y) - 46}px;`
 
-    d.getElementById('station-name').innerText = nameConcat(station.name)
-    d.getElementById('sat-name').innerText = nameConcat(satellite.name)
+    d.getElementById('station-name').innerText = concat.name(station.name)
+    d.getElementById('sat-name').innerText = concat.name(satellite.name)
   })
 })
-
-function nameConcat (str) {
-  var split = str.split(' ')
-  if (split.length > 2) {
-    return `${split[0]} ${split[1]}`
-  } else {
-    return str
-  }
-}
