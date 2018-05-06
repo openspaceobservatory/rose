@@ -282,10 +282,10 @@ Screen 3
 
 @keyframes out-pulse {
   0% {
-    transform: scale(0.9);
+    transform: scale(1);
     opacity: 1; }
   80% {
-    transform: scale(3);
+    transform: scale(2);
     opacity: 0; }
   100% {
     opacity: 0; } }
