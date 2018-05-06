@@ -23,11 +23,11 @@ function randomSatSprite() {
 // preset positions for satellites
 var satPositions = {
   available: [
-    {x: 750, y: 400},
+    {x: 750, y: 300},
     {x: 250, y: 100},
-    {x: 475, y: 200},
-    {x: 50,  y: 300},
-    {x: 300, y: 350}
+    {x: 560, y: 190},
+    {x: 75,  y: 150},
+    {x: 325, y: 300}
   ]
 }
 
@@ -78,15 +78,15 @@ function drawSatellites(sats) {
 
   text.append("tspan")
       .attr("x", 50)
-      .attr("dy", "1.2em")
+      .attr("dy", "2.3em")
       .attr("class", "name-sat")
       .text(d => d.name)
 
-  text.append("tspan")
+/*  text.append("tspan")
       .attr("x", 50)
       .attr("dy", "1.2em")
       .attr("class", "description-icon")
-      .text("Origin Information")
+      .text("Origin Information")*/
 
   group.append("svg:image")
        .attr("class", "sat-icon")
@@ -119,12 +119,12 @@ function drawSatellites(sats) {
 // preset positions for ground stations
 var stationPositions = {
   available: [
-    {x: 400, y: 510},
-    {x: 100,   y: 610},
-    {x: 550, y: 610},
-    {x: 270, y: 610},
-    {x: 750, y: 640},
-    {x: 150, y: 490}
+    {x: 425, y: 530},
+    {x: -300,   y: 630},
+    {x: 570, y: 630},
+    {x: 270, y: 590},
+    {x: 730, y: 600},
+    {x: 125, y: 490}
   ]
 }
 
@@ -170,13 +170,13 @@ function drawStations(stations) {
 
   text.append("tspan")
       .attr("x", 50)
-      .attr("dy", "1.2em")
+      .attr("dy", "1.8em")
       .attr("class", "name-station")
       .text(d => d.name)
 
   text.append("tspan")
       .attr("x", 50)
-      .attr("dy", "1.2em")
+      .attr("dy", "1.6em")
       .attr("class", "description-icon")
       .text(d => d.lat.toFixed(2) + ', ' + d.lng.toFixed(2))
 
@@ -220,7 +220,7 @@ function drawTransmissionLines(observations) {
                               .append("line")
                               .attr("stroke", "black")
                               .attr("stroke-cap", "round")
-                              .attr("stroke-width", "2")
+                              .attr("stroke-width", "5")
                               .attr("stroke-dasharray", "7,7")
                               .attr("x1", d => getStationCenterPos(d).x)
                               .attr("y1", d => getStationCenterPos(d).y)
@@ -262,7 +262,7 @@ theFutureStartsHereStation = {
 var el_countdown = document.getElementById('countdown')
 
 countdown(function (time) {
-  el_countdown.innerText = `${time}`
+ // el_countdown.innerText = `${time}`
 })
 
 api(function () {
