@@ -247,8 +247,8 @@ countdown(function (time) {
 
 api(function () {
   // update background color
-  var d = new Date()
-  updateBgColor(d, window.state.weather.sunrise, window.state.weather.sunset)
+  var date = new Date()
+  updateBgColor(date, window.state.weather.sunrise, window.state.weather.sunset)
 
   var carouselObservations = carousel.observations()
   var carouselSats = carousel.satellites()

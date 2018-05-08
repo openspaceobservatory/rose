@@ -15,8 +15,7 @@ window.state = {
   stationsByName: {}
 }
 
-// Set widths
-var w = window,
+// Set widthsvar w = window,
     d = document,
     e = d.documentElement,
     g = d.getElementsByTagName('body')[0],
@@ -125,6 +124,11 @@ function setInCarouselClass(observation) {
 
 api(function () {
   if (!d3Initialized) initializeD3()
+
+  // update background color
+  var date = new Date()
+  updateBgColor(date, window.state.weather.sunrise, window.state.weather.sunset)
+
 
   // "d3 app"
   var observations = window.state.observations.slice().reverse()

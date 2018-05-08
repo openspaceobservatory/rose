@@ -2,6 +2,7 @@ var fileExtension = require('file-extension')
 
 var api = require('./lib/api')
 var countdown = require('./lib/countdown')
+var updateBgColor = require('./lib/background-color')
 var isImage = require('./lib/is-image')
 var carousel = require('./lib/carousel')
 var sync = require('./lib/sync')
@@ -33,6 +34,10 @@ var el_info_satellite = d.getElementById('info-satellite')
 var el_info_station = d.getElementById('info-station')
 
 api(function () {
+  // update background color
+  var date = new Date()
+  updateBgColor(date, window.state.weather.sunrise, window.state.weather.sunset)
+
   if (!renderFlag) {
     renderFlag = true
     sync.setHighlightInterval(renderImage)
