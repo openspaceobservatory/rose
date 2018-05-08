@@ -219,9 +219,9 @@ Screen 3
 #satellite-image {
   display: block;
   margin: 0 auto;
-  margin-top: 20vh;
-  max-height: 60vh;
-  max-width: 80vw; }
+  margin-top: 150px;
+  max-height: 550px;
+  max-width: 900px; }
 
 .axis-labels {
   color: #fff;
