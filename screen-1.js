@@ -220,7 +220,7 @@ function drawTransmissionLines(observations) {
                               .append("line")
                               .attr("stroke", "black")
                               .attr("stroke-cap", "round")
-                              .attr("stroke-width", "5")
+                              .attr("stroke-width", "2")
                               .attr("stroke-dasharray", "7,7")
                               .attr("x1", d => getStationCenterPos(d).x)
                               .attr("y1", d => getStationCenterPos(d).y)
