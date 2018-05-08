@@ -36,7 +36,7 @@ var smallObsSize = 5
 // outline variables
 var outlineRadius = 35
 var outlineAxisOffset = 10
-var outlineColor = "#0C3"
+var outlineColor = "#FAFDCB"
 var outlineThickness = 2
 var outlineOpacity = 1
 
@@ -48,7 +48,7 @@ var xOffset = 50
 var yOffset = -40
 
 // time rang for tiny dots
-var maxTimeRange = 3*60*60*1000 // in milliseconds
+var maxTimeRange = 8*60*60*1000 // in milliseconds
 var smallObsScale = d3.scaleLinear()
                       .domain([0,maxTimeRange])
                       .range([smallObsSize,0])
@@ -169,17 +169,17 @@ api(function () {
     d3.selectAll(".observation:not(.highlighted)")
       .transition()
       .ease(d3.easeBounce)
-      .duration(2000)
+      .duration(3000)
       .attr("r", observationRadius)
 
     d3.selectAll(".observation.highlighted")
       .transition()
       .ease(d3.easeElastic)
-      .duration(2000)
+      .duration(5000)
       .attr("r", observationRadius)
 
-    var x = xScale(carousel.highlighted().station.name)
-    var y = yScale(carousel.highlighted().satellite.norad_cat_id)
+    var x = xScale(station.name)
+    var y = yScale(satellite.norad_cat_id)
 
 
     // remove previous styling

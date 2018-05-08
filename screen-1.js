@@ -283,7 +283,7 @@ api(function () {
                                            .attr("opacity", "0.2")
     d3.select("#obs-" + observation.id + " line").transition()
                                                  .duration(4000)
-                                                 .attr("stroke", "#0C3")
+                                                 .attr("stroke", "#FAFDCB")
                                                  .attr("opacity", "1")
   })
 
