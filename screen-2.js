@@ -12,7 +12,8 @@ window.state = {
   satellitesByName: {},
   stations: [],
   stationsById: {},
-  stationsByName: {}
+  stationsByName: {},
+  flags: {apiCalled: false}
 }
 
 // Set widthsvar w = window,
@@ -159,78 +160,82 @@ api(function () {
   d3Obs.merge(d3ObsEnter)
       .classed("inCarousel", setInCarouselClass)
 
-  sync.setHighlightInterval(function() {
-    var {station, satellite} = carousel.highlighted()
+  if (!window.state.flags.apiCalled) {
+    window.state.flags.apiCalled = true
 
-    // add station & satelite sprites here
-    d3.selectAll(".observation")
-      .classed("highlighted", setHighlightedClass)
+    sync.setHighlightInterval(function() {
+      var {station, satellite} = carousel.highlighted()
 
-    d3.selectAll(".observation:not(.highlighted)")
-      .transition()
-      .ease(d3.easeBounce)
-      .duration(3000)
-      .attr("r", observationRadius)
+      // add station & satelite sprites here
+      d3.selectAll(".observation")
+        .classed("highlighted", setHighlightedClass)
 
-    d3.selectAll(".observation.highlighted")
-      .transition()
-      .ease(d3.easeElastic)
-      .duration(5000)
-      .attr("r", observationRadius)
+      d3.selectAll(".observation:not(.highlighted)")
+        .transition()
+        .ease(d3.easeBounce)
+        .duration(3000)
+        .attr("r", observationRadius)
 
-    var x = xScale(station.name)
-    var y = yScale(satellite.norad_cat_id)
+      d3.selectAll(".observation.highlighted")
+        .transition()
+        .ease(d3.easeElastic)
+        .duration(5000)
+        .attr("r", observationRadius)
 
-
-    // remove previous styling
-    svgContainer.selectAll("line").remove()
-    svgContainer.selectAll(".highlighted-outline").remove()
-    svgContainer.selectAll(".highlighted-pulse").remove()
-
-    // add vertical axis
-    svgContainer.append("line")
-                .attr("stroke", outlineColor)
-                .attr("stroke-width", outlineThickness)
-                .attr("x1", x)
-                .attr("y1", y + outlineRadius + outlineAxisOffset)
-                .attr("x2", x)
-                .attr("y2", contentHeight - 155)
-
-    // add horizontal axis
-    svgContainer.append("line")
-                .attr("stroke", outlineColor)
-                .attr("stroke-width", outlineThickness)
-                .attr("x1", x - outlineRadius - outlineAxisOffset)
-                .attr("y1", y)
-                .attr("x2", 150)
-                .attr("y2", y)
-
-    // add highlighted outline
-    svgContainer.append("circle")
-                .attr("class", "highlighted-outline")
-                .attr("stroke", outlineColor)
-                .attr("stroke-width", outlineThickness)
-                .attr("fill", "none")
-                .attr("r", outlineRadius)
-                .attr("cx", x)
-                .attr("cy", y)
-
-    // add highlighted pulse
-    svgContainer.append("circle")
-                .attr("class", "highlighted-pulse")
-                .attr("stroke", "#FFF")
-                .attr("stroke-width", 2)
-                .attr("fill", "#FFF")
-                .attr('style', "transform-origin: " + x + "px " + y + "px;")
-                .attr("r", largeObsSize)
-                .attr("cx", x)
-                .attr("cy", y)
+      var x = xScale(station.name)
+      var y = yScale(satellite.norad_cat_id)
 
 
-    d.getElementById('station').style = `left: ${Math.round(0.99 * x) - 69}px;`
-    d.getElementById('sat').style = `top: ${Math.round(0.99 * y) - 46}px;`
+      // remove previous styling
+      svgContainer.selectAll("line").remove()
+      svgContainer.selectAll(".highlighted-outline").remove()
+      svgContainer.selectAll(".highlighted-pulse").remove()
 
-    d.getElementById('station-name').innerText = concat.name(station.name)
-    d.getElementById('sat-name').innerText = concat.name(satellite.name)
-  })
+      // add vertical axis
+      svgContainer.append("line")
+                  .attr("stroke", outlineColor)
+                  .attr("stroke-width", outlineThickness)
+                  .attr("x1", x)
+                  .attr("y1", y + outlineRadius + outlineAxisOffset)
+                  .attr("x2", x)
+                  .attr("y2", contentHeight - 155)
+
+      // add horizontal axis
+      svgContainer.append("line")
+                  .attr("stroke", outlineColor)
+                  .attr("stroke-width", outlineThickness)
+                  .attr("x1", x - outlineRadius - outlineAxisOffset)
+                  .attr("y1", y)
+                  .attr("x2", 150)
+                  .attr("y2", y)
+
+      // add highlighted outline
+      svgContainer.append("circle")
+                  .attr("class", "highlighted-outline")
+                  .attr("stroke", outlineColor)
+                  .attr("stroke-width", outlineThickness)
+                  .attr("fill", "none")
+                  .attr("r", outlineRadius)
+                  .attr("cx", x)
+                  .attr("cy", y)
+
+      // add highlighted pulse
+      svgContainer.append("circle")
+                  .attr("class", "highlighted-pulse")
+                  .attr("stroke", "#FFF")
+                  .attr("stroke-width", 2)
+                  .attr("fill", "#FFF")
+                  .attr('style', "transform-origin: " + x + "px " + y + "px;")
+                  .attr("r", largeObsSize)
+                  .attr("cx", x)
+                  .attr("cy", y)
+
+
+      d.getElementById('station').style = `left: ${Math.round(0.99 * x) - 69}px;`
+      d.getElementById('sat').style = `top: ${Math.round(0.99 * y) - 46}px;`
+
+      d.getElementById('station-name').innerText = concat.name(station.name)
+      d.getElementById('sat-name').innerText = concat.name(satellite.name)
+    })
+  }
 })

@@ -14,7 +14,8 @@ window.state = {
   satellitesByName: {},
   stations: [],
   stationsById: {},
-  stationsByName: {}
+  stationsByName: {},
+  flags: {apiCalled: false}
 }
 
 // Set widths
@@ -40,7 +41,10 @@ api(function () {
 
   if (!renderFlag) {
     renderFlag = true
-    sync.setHighlightInterval(renderImage)
+    if (!window.state.flags.apiCalled) {
+      window.state.falgs.apiCalled = true
+      sync.setHighlightInterval(renderImage)
+    }
   }
 })
 
@@ -57,7 +61,7 @@ function renderImage () {
   el_info_station.innerHTML = `as observed by <strong>${station.name} Station</strong>`
 
   function source () {
-    if (observation.demoddata.length > 0) { 
+    if (observation.demoddata.length > 0) {
       var entry = observation.demoddata[0].payload_demod
       var ext = fileExtension(entry)
 

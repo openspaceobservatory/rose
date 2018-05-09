@@ -11,7 +11,8 @@ window.state = {
   satellitesByName: {},
   stations: [],
   stationsById: {},
-  stationsByName: {}
+  stationsByName: {},
+  flags: {apiCalled: false}
 }
 
 function randomSatSprite() {
@@ -266,25 +267,27 @@ api(function () {
 
   animateTransmissionLines()
 
-  sync.setHighlightInterval(function() {
-    var {station, satellite, observation} = carousel.highlighted()
+  if (!window.state.flags.apiCalled) {
+    window.state.flags.apiCalled = true
+    sync.setHighlightInterval(function() {
+      var {station, satellite, observation} = carousel.highlighted()
 
-    d3.select()
+      d3.select()
 
-    d3.selectAll(".box-sat").classed("highlighted", false)
-    d3.selectAll(".box-station").classed("highlighted", false)
+      d3.selectAll(".box-sat").classed("highlighted", false)
+      d3.selectAll(".box-station").classed("highlighted", false)
 
-    d3.select("#sat-" + satellite.norad_cat_id).classed("highlighted", true)
-    d3.select("#station-" + station.id).classed("highlighted", true)
+      d3.select("#sat-" + satellite.norad_cat_id).classed("highlighted", true)
+      d3.select("#station-" + station.id).classed("highlighted", true)
 
-    d3.selectAll(".transmission-line line").transition()
-                                           .duration(4000)
-                                           .attr("stroke", "black")
-                                           .attr("opacity", "0.2")
-    d3.select("#obs-" + observation.id + " line").transition()
-                                                 .duration(4000)
-                                                 .attr("stroke", "#FAFDCB")
-                                                 .attr("opacity", "1")
-  })
-
+      d3.selectAll(".transmission-line line").transition()
+                                             .duration(4000)
+                                             .attr("stroke", "black")
+                                             .attr("opacity", "0.2")
+      d3.select("#obs-" + observation.id + " line").transition()
+                                                   .duration(4000)
+                                                   .attr("stroke", "#FAFDCB")
+                                                   .attr("opacity", "1")
+    })
+  }
 })
