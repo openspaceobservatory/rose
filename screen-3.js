@@ -42,7 +42,7 @@ api(function () {
   if (!renderFlag) {
     renderFlag = true
     if (!window.state.flags.apiCalled) {
-      window.state.falgs.apiCalled = true
+      window.state.flags.apiCalled = true
       sync.setHighlightInterval(renderImage)
     }
   }
