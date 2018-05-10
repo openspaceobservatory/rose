@@ -291,3 +291,24 @@ api(function () {
     })
   }
 })
+
+// Constellation
+
+var imgCount = 1;
+
+function changeConstellation() {
+
+    var image = document.getElementById('constellation');
+    image.src = "assets/dist/img/constellations/" + imgCount + ".svg";
+    imgCount = imgCount + 1;
+    if (imgCount > 16) {
+      imgCount = 1;
+    }
+
+}
+setInterval(function(){changeConstellation()}, 60000);
+
+
+
+
+

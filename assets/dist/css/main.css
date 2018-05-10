@@ -160,7 +160,8 @@ Screen 1
   border: 1px solid #fff; }
   #screen-1 #box-constellations img {
     display: block;
-    height: 120px;
+    max-height: 120px;
+    max-width: 170px;
     margin: 0 auto;
     margin-top: 15px; }
 
@@ -226,8 +227,8 @@ Screen 3
 .axis-labels {
   color: #fff;
   font-family: 'IBM Plex Sans';
-  font-size: 22px;
-  font-weight: 100;
+  font-size: 22px !important;
+  font-weight: 100 !important;
   text-transform: uppercase; }
 
 .countdown-container {
