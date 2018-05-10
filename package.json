@@ -17,7 +17,7 @@
   "scripts": {
     "build": "rm -rf dist && npm run build-js && npm run build-copy",
     "build-js": "browserify screen-1.js -t envify -o dist/1/screen-1.js && browserify screen-2.js -t envify -o dist/2/screen-2.js && browserify screen-3.js -t envify -o dist/3/screen-3.js",
-    "build-copy": "cp screen-1.html dist/1/index.html && cp screen-2.html dist/2/index.html && cp screen-3.html dist/3/index.html && cp -R assets dist/1/assets && cp -R assets dist/2/assets && cp -R assets dist/3/assets",
+    "build-copy": "cp index.html dist/index.html && cp screen-1.html dist/1/index.html && cp screen-2.html dist/2/index.html && cp screen-3.html dist/3/index.html && cp -R assets dist/1/assets && cp -R assets dist/2/assets && cp -R assets dist/3/assets",
     "start": "source .env && electron app.js",
     "sass-watch": "node-sass --watch assets/scss -o assets/dist/css"
   },
