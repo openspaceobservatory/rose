@@ -105,6 +105,47 @@ strong {
     transform: translateX(100%); } }
 
 /***************
+Index
+***************/
+#landing {
+  padding: 100px;
+  max-width: 800px;
+  color: #000; }
+  @media screen and (max-width: 1000px) {
+    #landing {
+      padding: 50px; } }
+  #landing h1 {
+    font-size: 56px;
+    font-weight: 700;
+    margin-top: 0; }
+    @media screen and (max-width: 1000px) {
+      #landing h1 {
+        font-size: 36px; } }
+  #landing h3 {
+    font-size: 36px;
+    font-weight: 700;
+    margin-top: 50px;
+    margin-bottom: 20px; }
+    @media screen and (max-width: 1000px) {
+      #landing h3 {
+        font-size: 24px; } }
+  #landing p {
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 100; }
+    @media screen and (max-width: 1000px) {
+      #landing p {
+        font-size: 14px;
+        line-height: 20px; } }
+  #landing img {
+    width: 80%;
+    max-width: 300px;
+    margin: 75px 0; }
+    @media screen and (max-width: 1000px) {
+      #landing img {
+        margin: 25px 0; } }
+
+/***************
 Screen 1
 ***************/
 #screen-1.sunrise {
@@ -227,8 +268,8 @@ Screen 3
 .axis-labels {
   color: #fff;
   font-family: 'IBM Plex Sans';
-  font-size: 22px !important;
-  font-weight: 100 !important;
+  font-size: 22px;
+  font-weight: 100;
   text-transform: uppercase; }
 
 .countdown-container {

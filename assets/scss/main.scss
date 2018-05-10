@@ -6,6 +6,9 @@ $color-sunset: #D36A6A;
 $color-sunset-dark: #2B2020;
 
 
+$break-small: 1000px;
+
+
 /***************
 Global
 ***************/
@@ -128,6 +131,54 @@ strong {
     transform: translateX(100%);
   }
 }
+
+/***************
+Index
+***************/
+
+#landing {
+  padding: 100px;
+  max-width: 800px;
+  color: #000;
+  @media screen and (max-width: $break-small) {
+    padding: 50px;
+  }
+  h1 {
+    font-size: 56px;
+    font-weight: 700;
+    margin-top: 0;
+    @media screen and (max-width: $break-small) {
+      font-size: 36px;
+    }
+  }
+  h3 {
+    font-size: 36px;
+    font-weight: 700;    
+    margin-top: 50px;
+    margin-bottom: 20px;
+    @media screen and (max-width: $break-small) {
+      font-size: 24px;
+    }
+  }
+  p {
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 100;
+    @media screen and (max-width: $break-small) {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+  img {
+    width: 80%;
+    max-width: 300px;
+    margin: 75px 0;
+    @media screen and (max-width: $break-small) {
+      margin: 25px 0;
+    }
+  }
+}
+
 
 /***************
 Screen 1
@@ -279,8 +330,8 @@ Screen 3
 .axis-labels {
   color: #fff;
   font-family: 'IBM Plex Sans';
-  font-size: 22px !important;
-  font-weight: 100 !important;
+  font-size: 22px ;
+  font-weight: 100;
   text-transform: uppercase;
 }
 

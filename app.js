@@ -48,6 +48,13 @@ app.on('ready', function () {
             win.loadURL('file://' + path.join(__dirname, 'screen-3.html'))
           }
         },
+        {
+          label: 'Load Index',
+          accelerator: 'CmdOrCtrl+4',
+          click (item, win, event) {
+            win.loadURL('file://' + path.join(__dirname, 'index.html'))
+          }
+        },
         {type: 'separator'},
         {role: 'undo'},
         {role: 'redo'},
