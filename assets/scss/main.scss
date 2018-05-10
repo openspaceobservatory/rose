@@ -148,7 +148,14 @@ Index
     font-weight: 700;
     margin-top: 0;
     @media screen and (max-width: $break-small) {
-      font-size: 36px;
+      display: none;
+    }
+  }
+  .mobile {
+    display: none;
+    @media screen and (max-width: $break-small) {
+      font-size: 28px;
+      display: block;
     }
   }
   h3 {
@@ -165,7 +172,7 @@ Index
     line-height: 30px;
     font-weight: 100;
     @media screen and (max-width: $break-small) {
-      font-size: 14px;
+      font-size: 16px;
       line-height: 20px;
     }
   }

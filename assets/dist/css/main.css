@@ -120,7 +120,13 @@ Index
     margin-top: 0; }
     @media screen and (max-width: 1000px) {
       #landing h1 {
-        font-size: 36px; } }
+        display: none; } }
+  #landing .mobile {
+    display: none; }
+    @media screen and (max-width: 1000px) {
+      #landing .mobile {
+        font-size: 28px;
+        display: block; } }
   #landing h3 {
     font-size: 36px;
     font-weight: 700;
@@ -135,7 +141,7 @@ Index
     font-weight: 100; }
     @media screen and (max-width: 1000px) {
       #landing p {
-        font-size: 14px;
+        font-size: 16px;
         line-height: 20px; } }
   #landing img {
     width: 80%;
