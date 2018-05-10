@@ -140,7 +140,8 @@ Index
   #landing img {
     width: 80%;
     max-width: 300px;
-    margin: 75px 0; }
+    margin-top: 25px;
+    margin-bottom: 50px; }
     @media screen and (max-width: 1000px) {
       #landing img {
         margin: 25px 0; } }
