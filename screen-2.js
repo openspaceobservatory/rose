@@ -115,8 +115,10 @@ function observationRadius(observation) {
   }
 }
 
-function setHighlightedClass(observation) {
-  return carousel.highlighted().observation == observation
+function setHighlightedClass(highlightedObs) {
+  return (obs) => {
+    return highlightedObs == obs
+  }
 }
 
 function setInCarouselClass(observation) {
@@ -164,11 +166,11 @@ api(function () {
     window.state.flags.apiCalled = true
 
     sync.setHighlightInterval(function() {
-      var {station, satellite} = carousel.highlighted()
+      var {station, satellite, observation} = carousel.highlighted()
 
       // add station & satelite sprites here
       d3.selectAll(".observation")
-        .classed("highlighted", setHighlightedClass)
+        .classed("highlighted", setHighlightedClass(observation))
 
       d3.selectAll(".observation:not(.highlighted)")
         .transition()
